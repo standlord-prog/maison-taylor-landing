@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MAISON TAYLOR — Sell it before you make it. AI demand validation for fashion.</title>
+<meta name="description" content="MAISON TAYLOR is the AI demand-validation studio for fashion brands. Design with AI, validate with pre-orders, manufacture only what's sold. Ending fashion's $500B overproduction problem." />
+<meta property="og:title" content="MAISON TAYLOR — Sell it before you make it." />
+<meta property="og:description" content="AI design + pre-order validation. Manufacture only what's sold." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: #0a0a0a;
+    color: #f5f5f5;
+    font-family: 'Inter', -apple-system, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    font-weight: 300;
+  }
+  h1, h2, h3, .serif {
+    font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+    font-weight: 400;
+  }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+  nav {
+    padding: 2rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    letter-spacing: 0.25em;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    line-height: 1.1;
+    text-align: left;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .logo .maison { font-size: 0.7rem; letter-spacing: 0.5em; opacity: 0.85; }
+  .logo .taylor { font-size: 1.4rem; letter-spacing: 0.18em; font-weight: 500; margin-top: -2px; }
+
+  /* Hero brand mark (mimics letterpress identity card) */
+  .brand-mark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto 3rem;
+    color: #f5f5f5;
+  }
+  .brand-mark .maison-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1rem, 1.5vw, 1.3rem);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    font-weight: 400;
+    opacity: 0.9;
+    margin-bottom: 0.2rem;
+  }
+  .brand-mark .taylor-line {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+  }
+  .brand-mark svg.monogram {
+    width: clamp(70px, 8vw, 100px);
+    height: auto;
+    opacity: 0.95;
+  }
+  nav a { color: #f5f5f5; text-decoration: none; margin-left: 2rem; opacity: 0.7; transition: opacity 0.3s; }
+  nav a:hover { opacity: 1; }
+
+  .hero {
+    padding: 7rem 0 6rem;
+    text-align: center;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .hero .label {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 2rem;
+  }
+  .hero h1 {
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+    line-height: 1.05;
+  }
+  .hero .tagline {
+    font-size: 1.25rem;
+    color: #aaa;
+    max-width: 720px;
+    margin: 0 auto 3.5rem;
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .cta {
+    display: inline-block;
+    padding: 1.1rem 3rem;
+    border: 1px solid #f5f5f5;
+    color: #f5f5f5;
+    text-decoration: none;
+    letter-spacing: 0.3em;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    background: transparent;
+    cursor: pointer;
+  }
+  .cta:hover { background: #f5f5f5; color: #0a0a0a; }
+  .cta-secondary { background: transparent; border-color: #444; color: #aaa; }
+  .cta-secondary:hover { border-color: #f5f5f5; color: #f5f5f5; background: transparent; }
+
+  .section { padding: 6rem 0; border-bottom: 1px solid #1a1a1a; }
+  .section h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    letter-spacing: -0.01em;
+  }
+  .section .lead {
+    font-size: 1.2rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem;
+    color: #aaa;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
+
+  .problem-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .stat {
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    border: 1px solid #1a1a1a;
+    transition: border-color 0.3s;
+  }
+  .stat:hover { border-color: #333; }
+  .stat .number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    color: #f5f5f5;
+    line-height: 1;
+  }
+  .stat .label {
+    font-size: 0.85rem;
+    color: #777;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+  }
+
+  .modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .module {
+    padding: 2.5rem 2rem;
+    border: 1px solid #1a1a1a;
+    transition: all 0.3s;
+  }
+  .module:hover { border-color: #333; transform: translateY(-4px); }
+  .module-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    color: #555;
+    letter-spacing: 0.3em;
+    margin-bottom: 1.2rem;
+    font-style: italic;
+  }
+  .module h3 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .module p { color: #888; font-size: 0.95rem; }
+
+  .flow {
+    margin-top: 3rem;
+    padding: 3rem 2rem;
+    border: 1px solid #1a1a1a;
+    text-align: center;
+  }
+  .flow-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.3rem, 2.5vw, 2rem);
+    line-height: 1.8;
+    color: #ccc;
+  }
+  .flow-text .arrow { color: #555; margin: 0 0.7rem; }
+  .flow-text .highlight { color: #f5f5f5; font-style: italic; }
+
+  .founders {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+  }
+  .founder {
+    padding: 2.5rem;
+    border: 1px solid #1a1a1a;
+  }
+  .founder h3 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  .founder .role {
+    font-size: 0.8rem;
+    color: #777;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .founder p { color: #bbb; font-size: 0.95rem; }
+
+  .quote {
+    text-align: center;
+    padding: 5rem 2rem;
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+    font-style: italic;
+    font-weight: 400;
+    max-width: 900px;
+    margin: 0 auto 2rem;
+    line-height: 1.4;
+    color: #f5f5f5;
+  }
+  .quote-attr {
+    font-size: 0.85rem;
+    color: #777;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .waitlist-section { text-align: center; padding: 6rem 0; }
+
+  .footer {
+    padding: 3rem 0 2rem;
+    text-align: center;
+    color: #555;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+  }
+  .footer a { color: #888; text-decoration: none; }
+  .footer a:hover { color: #f5f5f5; }
+
+  @media (max-width: 700px) {
+    .founders { grid-template-columns: 1fr; gap: 2rem; }
+    nav { flex-direction: column; gap: 1rem; }
+    nav a { margin-left: 0; margin-right: 1rem; display: inline-block; }
+    .hero { padding: 4rem 0; }
+    .section { padding: 4rem 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<nav>
+  <div class="logo">
+    <span class="maison">Maison</span>
+    <span class="taylor">Taylor</span>
+  </div>
+  <div>
+    <a href="#problem">Problem</a>
+    <a href="#how">How</a>
+    <a href="#founders">Founders</a>
+    <a href="#waitlist">Waitlist</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="brand-mark">
+    <div class="maison-line">Maison</div>
+    <div class="taylor-line">Taylor</div>
+    <svg class="monogram" viewBox="0 0 140 60" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="0.8">
+      <!-- left laurel branch -->
+      <path d="M 10 32 Q 15 28 22 32 Q 28 30 35 35 Q 42 33 50 38" stroke-linecap="round" stroke-width="0.6"/>
+      <ellipse cx="18" cy="30" rx="3" ry="1.5" transform="rotate(-25 18 30)" fill="currentColor"/>
+      <ellipse cx="26" cy="32" rx="3" ry="1.5" transform="rotate(-15 26 32)" fill="currentColor"/>
+      <ellipse cx="34" cy="34" rx="3" ry="1.5" transform="rotate(-10 34 34)" fill="currentColor"/>
+      <ellipse cx="42" cy="36" rx="3" ry="1.5" transform="rotate(-5 42 36)" fill="currentColor"/>
+      <!-- right laurel branch -->
+      <path d="M 130 32 Q 125 28 118 32 Q 112 30 105 35 Q 98 33 90 38" stroke-linecap="round" stroke-width="0.6"/>
+      <ellipse cx="122" cy="30" rx="3" ry="1.5" transform="rotate(25 122 30)" fill="currentColor"/>
+      <ellipse cx="114" cy="32" rx="3" ry="1.5" transform="rotate(15 114 32)" fill="currentColor"/>
+      <ellipse cx="106" cy="34" rx="3" ry="1.5" transform="rotate(10 106 34)" fill="currentColor"/>
+      <ellipse cx="98" cy="36" rx="3" ry="1.5" transform="rotate(5 98 36)" fill="currentColor"/>
+      <!-- M T monogram in center -->
+      <text x="70" y="40" text-anchor="middle" font-family="Cormorant Garamond, serif" font-weight="500" font-size="28" fill="currentColor" stroke="none" letter-spacing="-2">MT</text>
+    </svg>
+  </div>
+  <div class="label">AI Demand Validation for Fashion — Coming 2026</div>
+  <h1>Sell it<br/>before you make it.</h1>
+  <p class="tagline">AI fashion studio for the post-overproduction era.<br/>Design with AI. Validate with pre-orders. Manufacture only what's sold.</p>
+  <a href="#waitlist" class="cta">Join the waitlist</a>
+</section>
+
+<section class="section" id="problem">
+  <h2>Fashion is built backwards.</h2>
+  <p class="lead">Every brand designs, manufactures, then prays.<br/>The result: $500 billion wasted every year. The world's #2 polluter.</p>
+  <div class="problem-stats">
+    <div class="stat">
+      <div class="number">$500B</div>
+      <div class="label">Wasted on unsold inventory annually</div>
+    </div>
+    <div class="stat">
+      <div class="number">$20K</div>
+      <div class="label">Cost of one professional photoshoot</div>
+    </div>
+    <div class="stat">
+      <div class="number">280K</div>
+      <div class="label">Indie designers locked out of professional tools</div>
+    </div>
+    <div class="stat">
+      <div class="number">#2</div>
+      <div class="label">Most polluting industry on Earth</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="how">
+  <h2>Flip the production loop.</h2>
+  <p class="lead">References in. Collections out. Pre-orders before production. Zero waste fashion at last.</p>
+
+  <div class="flow">
+    <div class="flow-text">
+      <span class="highlight">References</span>
+      <span class="arrow">→</span>
+      <span class="highlight">AI Design</span>
+      <span class="arrow">→</span>
+      <span class="highlight">Virtual Try-On</span>
+      <span class="arrow">→</span>
+      <span class="highlight">Pre-Orders</span>
+      <span class="arrow">→</span>
+      <span class="highlight">Produce only what sold</span>
+    </div>
+  </div>
+
+  <div class="modules">
+    <div class="module">
+      <div class="module-num">— 01 —</div>
+      <h3>Reference Library</h3>
+      <p>Upload your saved Pinterest boards, runway photos, art history. AI understands your aesthetic — no prompts required.</p>
+    </div>
+    <div class="module">
+      <div class="module-num">— 02 —</div>
+      <h3>Collection Generator</h3>
+      <p>Reference-first synthesis. Generate 30 concepts in your signature style. Refine with "more like this, less like that."</p>
+    </div>
+    <div class="module">
+      <div class="module-num">— 03 —</div>
+      <h3>House Model Studio</h3>
+      <p>Your own persistent virtual models. 100% commercial rights. Style any way without permissions.</p>
+    </div>
+    <div class="module">
+      <div class="module-num">— 04 —</div>
+      <h3>Fabric Lab</h3>
+      <p>Upload fabric photos from the market. See how they fall on garments before you source a single yard.</p>
+    </div>
+    <div class="module">
+      <div class="module-num">— 05 —</div>
+      <h3>Pre-Order Engine</h3>
+      <p>Publish your collection. Let your audience reserve. Validate demand before you commit a single thread to production.</p>
+    </div>
+    <div class="module">
+      <div class="module-num">— 06 —</div>
+      <h3>Production Bridge</h3>
+      <p>Auto-generate tech drawings and patterns. Direct connect to manufacturers. Make only what people bought.</p>
+    </div>
+  </div>
+</section>
+
+<section class="quote">
+  <div class="container">
+    <div class="quote-text">
+      "I help brands scale their content through Invisible AI — delivering 100% realism based on my 10+ years of fashion production expertise. MAISON TAYLOR is the tool I built for myself first — and I'm using it right now to compete in the Vivienne Westwood × CLO 3D global design competition."
+    </div>
+    <div class="quote-attr">— Yulia Litvinova, Co-Founder & CEO</div>
+  </div>
+</section>
+
+<section class="section" id="founders">
+  <h2>Built by fashion operators<br/>who lived the problem.</h2>
+  <div class="founders">
+    <div class="founder">
+      <h3>Yulia Litvinova</h3>
+      <div class="role">Co-Founder · CEO · Chief Product · Austin, TX</div>
+      <p>AI Fashion Creator and Creative Director with 10+ years of fashion production expertise. 11+ published AI fashion campaigns including the "AI Photography — Marketplace CTR Growth" case study and Lea Voss — her AI fashion persona built from zero. Internationally awarded makeup artist (1st place New York, 2nd Vienna, 2nd St. Petersburg). Co-founded $3.6M ARR fashion brand with NYFW presence and SoHo + Fifth Avenue retail. Currently competing in the official Vivienne Westwood × CLO 3D global design competition using the MAISON TAYLOR workflow. <a href="https://www.behance.net/yulia_litvinova/projects" style="color:#888;text-decoration:underline;">Portfolio →</a></p>
+    </div>
+    <div class="founder">
+      <h3>Andrey Kuzmin</h3>
+      <div class="role">Co-Founder · CSO</div>
+      <p>22-year serial operator across B2B engineering (100+ person team), SaaS, e-commerce, fashion, and manufacturing. Built B2B vertical SaaS in Silicon Valley (2013) — learned distribution beats product. Co-founded $3.6M ARR fashion brand with NYFW and SoHo + Fifth Avenue retail. Two decades operating in marketplaces (Ozon, Lamoda, Wildberries) with deep performance-creative and conversion intuition. Yulia and Andrey are married — built two fashion businesses together with a battle-tested role split.</p>
+    </div>
+  </div>
+</section>
+
+<section class="waitlist-section" id="waitlist">
+  <div class="container">
+    <div style="font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: #888; margin-bottom: 2rem;">— Early Access —</div>
+    <h2 style="margin-bottom: 1.5rem;">Join the waitlist.</h2>
+    <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: #aaa; margin-bottom: 3rem; max-width: 600px; margin-left: auto; margin-right: auto;">First 100 indie designers and fashion students get lifetime founder pricing — $19/month forever.</p>
+    <a href="mailto:hello@maison-taylor.com?subject=MAISON TAYLOR%20waitlist&body=Hi%20MAISON%20team%2C%0A%0AI'd%20like%20to%20join%20the%20waitlist.%0A%0AName%3A%20%0AInstagram%2FPortfolio%3A%20%0ADesigner%2Fstudent%2Fbrand%3F%20%0AWhat%20you'd%20use%20MAISON%20for%3A%20" class="cta">Reserve your spot</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>MAISON TAYLOR — Coming 2026 — <a href="mailto:hello@maison-taylor.com">hello@maison-taylor.com</a></p>
+  <p style="margin-top: 0.5rem; opacity: 0.5;">© 2026 — Building the future of indie fashion</p>
+</footer>
+
+</div>
+
+</body>
+</html>
