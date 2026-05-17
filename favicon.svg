@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#0a0a0a"/>
+
+  <!-- Left laurel branch -->
+  <g fill="#f5f5f5" stroke="#f5f5f5">
+    <path d="M 130 440 Q 100 360 130 280 Q 168 210 240 175" fill="none" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="118" cy="405" rx="20" ry="8" transform="rotate(-65 118 405)"/>
+    <ellipse cx="106" cy="368" rx="22" ry="8" transform="rotate(-75 106 368)"/>
+    <ellipse cx="103" cy="328" rx="22" ry="8" transform="rotate(-82 103 328)"/>
+    <ellipse cx="111" cy="288" rx="22" ry="8" transform="rotate(-72 111 288)"/>
+    <ellipse cx="128" cy="252" rx="22" ry="8" transform="rotate(-60 128 252)"/>
+    <ellipse cx="153" cy="218" rx="22" ry="8" transform="rotate(-48 153 218)"/>
+    <ellipse cx="188" cy="192" rx="22" ry="8" transform="rotate(-32 188 192)"/>
+  </g>
+
+  <!-- Right laurel branch (mirror) -->
+  <g fill="#f5f5f5" stroke="#f5f5f5">
+    <path d="M 382 440 Q 412 360 382 280 Q 344 210 272 175" fill="none" stroke-width="3" stroke-linecap="round"/>
+    <ellipse cx="394" cy="405" rx="20" ry="8" transform="rotate(65 394 405)"/>
+    <ellipse cx="406" cy="368" rx="22" ry="8" transform="rotate(75 406 368)"/>
+    <ellipse cx="409" cy="328" rx="22" ry="8" transform="rotate(82 409 328)"/>
+    <ellipse cx="401" cy="288" rx="22" ry="8" transform="rotate(72 401 288)"/>
+    <ellipse cx="384" cy="252" rx="22" ry="8" transform="rotate(60 384 252)"/>
+    <ellipse cx="359" cy="218" rx="22" ry="8" transform="rotate(48 359 218)"/>
+    <ellipse cx="324" cy="192" rx="22" ry="8" transform="rotate(32 324 192)"/>
+  </g>
+
+  <!-- Crossing knot at base -->
+  <circle cx="256" cy="448" r="6" fill="#f5f5f5"/>
+  <path d="M 246 448 L 220 470 M 266 448 L 292 470" stroke="#f5f5f5" stroke-width="3" stroke-linecap="round" fill="none"/>
+
+  <!-- MT monogram center -->
+  <text x="256" y="330" text-anchor="middle"
+        font-family="Cormorant Garamond, Times New Roman, serif"
+        font-weight="500" font-size="230"
+        fill="#f5f5f5" letter-spacing="-30">MT</text>
+</svg>
