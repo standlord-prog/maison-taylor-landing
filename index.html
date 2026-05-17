@@ -78,11 +78,28 @@
     line-height: 1;
     margin-bottom: 1.5rem;
   }
-  .brand-mark svg.monogram {
-    width: clamp(180px, 20vw, 260px);
-    height: auto;
-    opacity: 0.95;
-    margin-top: 0.5rem;
+  .brand-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 0.7rem;
+    opacity: 0.7;
+    width: 100%;
+    max-width: 320px;
+  }
+  .brand-divider .line {
+    flex: 1;
+    height: 1px;
+    background: #f5f5f5;
+  }
+  .brand-divider .mt-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    flex-shrink: 0;
   }
   nav a { color: #f5f5f5; text-decoration: none; margin-left: 2rem; opacity: 0.7; transition: opacity 0.3s; }
   nav a:hover { opacity: 1; }
@@ -307,38 +324,11 @@
   <div class="brand-mark">
     <div class="maison-line">Maison</div>
     <div class="taylor-line">Taylor</div>
-    <svg class="monogram" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
-      <!-- Left laurel branch (curving up to embrace MT) -->
-      <g fill="currentColor" stroke="currentColor">
-        <path d="M 40 135 Q 28 105 32 75 Q 38 50 62 35" fill="none" stroke-width="1" stroke-linecap="round"/>
-        <ellipse cx="36" cy="125" rx="7" ry="2.8" transform="rotate(-65 36 125)"/>
-        <ellipse cx="30" cy="110" rx="7" ry="2.8" transform="rotate(-75 30 110)"/>
-        <ellipse cx="29" cy="93" rx="7" ry="2.8" transform="rotate(-82 29 93)"/>
-        <ellipse cx="32" cy="77" rx="7" ry="2.8" transform="rotate(-72 32 77)"/>
-        <ellipse cx="40" cy="62" rx="7" ry="2.8" transform="rotate(-58 40 62)"/>
-        <ellipse cx="51" cy="48" rx="7" ry="2.8" transform="rotate(-45 51 48)"/>
-        <ellipse cx="64" cy="38" rx="7" ry="2.8" transform="rotate(-32 64 38)"/>
-      </g>
-      <!-- Right laurel branch (mirrored) -->
-      <g fill="currentColor" stroke="currentColor">
-        <path d="M 160 135 Q 172 105 168 75 Q 162 50 138 35" fill="none" stroke-width="1" stroke-linecap="round"/>
-        <ellipse cx="164" cy="125" rx="7" ry="2.8" transform="rotate(65 164 125)"/>
-        <ellipse cx="170" cy="110" rx="7" ry="2.8" transform="rotate(75 170 110)"/>
-        <ellipse cx="171" cy="93" rx="7" ry="2.8" transform="rotate(82 171 93)"/>
-        <ellipse cx="168" cy="77" rx="7" ry="2.8" transform="rotate(72 168 77)"/>
-        <ellipse cx="160" cy="62" rx="7" ry="2.8" transform="rotate(58 160 62)"/>
-        <ellipse cx="149" cy="48" rx="7" ry="2.8" transform="rotate(45 149 48)"/>
-        <ellipse cx="136" cy="38" rx="7" ry="2.8" transform="rotate(32 136 38)"/>
-      </g>
-      <!-- Tying point at base -->
-      <circle cx="100" cy="138" r="2" fill="currentColor"/>
-      <path d="M 95 138 L 88 145 M 105 138 L 112 145" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" fill="none"/>
-      <!-- MT monogram center, interlocked serifs -->
-      <text x="100" y="100" text-anchor="middle"
-            font-family="Cormorant Garamond, serif"
-            font-weight="500" font-size="62"
-            fill="currentColor" letter-spacing="-6">MT</text>
-    </svg>
+    <div class="brand-divider">
+      <span class="line"></span>
+      <span class="mt-mark">MT</span>
+      <span class="line"></span>
+    </div>
   </div>
   <div class="label">AI Demand Validation for Fashion — Coming 2026</div>
   <h1>Sell it<br/>before you make it.</h1>
