@@ -672,8 +672,9 @@
 
   @media (max-width: 700px) {
     .founders { grid-template-columns: 1fr; gap: 2rem; }
-    nav { flex-direction: column; gap: 1rem; }
-    nav a { margin-left: 0; margin-right: 1rem; display: inline-block; }
+    /* Keep nav horizontal: logo left, hamburger right (drawer slides down separately) */
+    nav { flex-direction: row; gap: 0; }
+    nav a { margin-left: 0; }
     .hero { padding: 4rem 0; }
     .section { padding: 4rem 0; }
     .waitlist-form { flex-direction: column; align-items: stretch; }
