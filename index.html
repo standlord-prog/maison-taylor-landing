@@ -250,6 +250,54 @@
 
   .section { padding: 6rem 0; border-bottom: 1px solid #1a1a1a; }
 
+  /* Pitch video section */
+  #pitch-video .pv-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 360px) 1fr;
+    gap: 4rem;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  #pitch-video .pv-embed {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    max-height: 580px;
+    border: 1px solid #2a2a2a;
+    background: #0f0f0f;
+    overflow: hidden;
+  }
+  #pitch-video .pv-embed iframe {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    border: none;
+  }
+  #pitch-video .pv-eyebrow {
+    font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: #888; margin-bottom: 1.4rem;
+  }
+  #pitch-video h2 {
+    font-family: 'Cormorant Garamond', serif; font-weight: 400;
+    font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.05;
+    letter-spacing: -0.01em; margin-bottom: 1.5rem;
+    text-align: left;
+  }
+  #pitch-video .pv-text-body {
+    font-family: 'Cormorant Garamond', serif; font-style: italic;
+    font-size: 1.15rem; color: #aaa; line-height: 1.55;
+    margin-bottom: 1.6rem;
+  }
+  #pitch-video .pv-meta {
+    font-size: 0.7rem; letter-spacing: 0.15em; color: #666;
+    text-transform: uppercase;
+  }
+  @media (max-width: 820px) {
+    #pitch-video .pv-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    #pitch-video h2 { text-align: center; }
+    #pitch-video .pv-text-body { text-align: center; }
+    #pitch-video .pv-meta { text-align: center; }
+  }
+
   /* Prototype section */
   #demo .demo-container { max-width: 1200px; }
   #demo .demo-grid {
@@ -607,6 +655,7 @@
   <div>
     <a href="#problem">Problem</a>
     <a href="#how">How</a>
+    <a href="#pitch-video">Pitch</a>
     <a href="#demo">Prototype</a>
     <a href="#founders">Founders</a>
     <a href="#waitlist">Waitlist</a>
@@ -729,6 +778,30 @@
       "I help brands scale their content through Invisible AI — delivering 100% realism based on my 10+ years of fashion production expertise. MAISON TAYLOR is the tool I built for myself first — and I'm using it right now to compete in the Vivienne Westwood × CLO 3D global design competition."
     </div>
     <div class="quote-attr">— Yulia Litvinova, Co-Founder & Chief Product</div>
+  </div>
+</section>
+
+<section class="section" id="pitch-video">
+  <div class="container">
+    <div class="pv-grid">
+      <div class="pv-embed">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/Oi3yoD8wjyQ?rel=0&modestbranding=1&playsinline=1"
+          title="Yulia Litvinova — MAISON TAYLOR pitch"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy">
+        </iframe>
+      </div>
+      <div class="pv-text">
+        <div class="pv-eyebrow">60 seconds with the founder</div>
+        <h2>Yulia,<br/>in her own words.</h2>
+        <p class="pv-text-body">
+          "I built MAISON TAYLOR for myself first — and I'm using it right now to compete in the Vivienne Westwood × CLO 3D global design competition."
+        </p>
+        <div class="pv-meta">Recorded May 2026 · Austin, TX</div>
+      </div>
+    </div>
   </div>
 </section>
 
