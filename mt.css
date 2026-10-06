@@ -266,3 +266,7 @@ table.cmp td:not(:first-child), table.cmp th:not(:first-child) { text-align: cen
 .chain .shots { gap: .5rem; }
 .chain .shot span { font-size: .55rem; }
 @media (max-width: 1000px) { .chain { grid-template-columns: 1fr; } .chain .flow-text { transform: rotate(90deg); justify-self: center; } .chain .srcph { max-width: 18rem; margin: 0 auto; } .chain #after-carousel { max-width: 26rem; margin: 0 auto; } }
+
+/* Header logo (emblem) */
+.logo-img { height: 64px; width: auto; display: block; }
+@media (max-width: 760px) { .logo-img { height: 48px; } }

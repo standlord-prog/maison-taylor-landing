@@ -14,7 +14,7 @@
     nav.outerHTML =
       '<input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true">' +
       '<nav class="top">' +
-      '<a href="index.html" class="logo-link" aria-label="Maison Taylor — home"><div class="logo"><span class="maison">Maison</span><span class="taylor">Taylor</span></div></a>' +
+      '<a href="index.html" class="logo-link" aria-label="Maison Taylor — home"><picture><source srcset="logo-hero.webp" type="image/webp"><img class="logo-img" src="logo-hero.png" alt="Maison Taylor"></picture></a>' +
       '<label for="nav-toggle" class="nav-burger" aria-label="Menu" role="button" tabindex="0"><span></span><span></span><span></span></label>' +
       '<div class="nav-links">' +
       links.map(function (l) {
