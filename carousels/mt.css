@@ -236,12 +236,12 @@ table.cmp td:not(:first-child), table.cmp th:not(:first-child) { text-align: cen
 
 /* Catalog photos: 8-shot set */
 .shots { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; }
-.shot { position: relative; aspect-ratio: 4 / 5; background: #e9e4dc url(../assets/lea-hero-poster.jpg) center/cover no-repeat; overflow: hidden; }
+.shot { position: relative; aspect-ratio: 3 / 4; background: #e9e4dc; overflow: hidden; }
+.shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .shot span { position: absolute; left: 0; right: 0; bottom: 0; padding: .45rem .6rem; background: rgba(26,25,24,.78); font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; color: #f5f5f5; }
 .shot b { font-weight: 500; margin-right: .4rem; color: #aaa; }
-.shot.flat { background-color: #efe9df; background-size: 62%; background-position: center 40%; filter: grayscale(.15); }
-.shot.close { background-size: 420%; }
-.srcph { aspect-ratio: 4 / 5; background: url(../assets/lea-hero-poster.jpg) 50% 30%/cover; filter: saturate(.6) brightness(.82) contrast(.9); transform: rotate(-2deg); max-width: 22rem; margin: 0 auto; box-shadow: 0 1rem 2.5rem rgba(0,0,0,.35); }
+.srcph { aspect-ratio: 3 / 4; background: #fff; transform: rotate(-2deg); max-width: 22rem; margin: 0 auto; box-shadow: 0 1rem 2.5rem rgba(0,0,0,.35); overflow: hidden; }
+.srcph img { width: 100%; height: 100%; object-fit: contain; display: block; }
 .services { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 .service { border: 1px solid #2c2b29; padding: 2.4rem 2.2rem; display: flex; flex-direction: column; gap: 1rem; }
 .service h3 { font-size: 2rem; line-height: 1.1; }

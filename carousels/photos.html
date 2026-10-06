@@ -31,19 +31,21 @@
     <div>
       <div class="eyebrow" style="text-align:center;margin-bottom:1rem">One photo in &rarr; eight shots out</div>
       <div class="shots" id="hero-shots"></div>
+      <p class="case-note">Our test from one photo on Christy Dawn&rsquo;s public site. Not a client.</p>
     </div>
   </div>
 </section>
 
 <!-- 2. Before / after -->
 <section class="section">
-  <h2>From a phone photo to a full catalog set.</h2>
+  <h2>From one photo to a full catalog set.</h2>
   <p class="lead">The piece never changes: same color, cut and details. Only the model, the light and the styling are new.</p>
+  <div class="chips" id="set-pick" style="margin-bottom:2.5rem"></div>
   <div style="display:grid;grid-template-columns:1fr auto 2fr;gap:2.5rem;align-items:center" class="ba">
     <div style="text-align:center">
       <div class="eyebrow" style="margin-bottom:1.2rem">Before</div>
-      <div class="srcph"></div>
-      <p class="muted" style="margin-top:1.4rem">Your photo, as it is.</p>
+      <div class="srcph"><img id="src-img" src="photos-test/mate/0.jpg" alt=""></div>
+      <p class="muted" style="margin-top:1.4rem">The photo from the brand&rsquo;s site, as it is.</p>
     </div>
     <div class="flow-text"><span class="arrow">&rarr;</span></div>
     <div>
@@ -51,6 +53,7 @@
       <div class="shots" id="after-shots"></div>
     </div>
   </div>
+  <p class="form-note" style="text-align:center;margin-top:1.8rem">Our tests from one photo on each brand&rsquo;s public site. These brands are not our clients and did not take part.</p>
 </section>
 
 <!-- 3. The 8 shots -->
@@ -144,7 +147,16 @@
 </div>
 <script src="mt.js"></script>
 <script>
-['hero-shots', 'after-shots'].forEach(function (id) { MT.shots(document.getElementById(id)); });
+MT.shots(document.getElementById('hero-shots'), 'christydawn');
+var pick = document.getElementById('set-pick');
+['mate', 'setactive', 'taylorstitch', 'christydawn'].forEach(function (k, i) {
+  var b = document.createElement('button'); b.className = 'chip' + (i ? '' : ' on');
+  b.textContent = MT.photoSets[k].brand + ' · ' + MT.photoSets[k].product;
+  b.onclick = function () { show(k); pick.querySelectorAll('.chip').forEach(function (c) { c.classList.toggle('on', c === b); }); };
+  pick.appendChild(b);
+});
+function show(k) { MT.shots(document.getElementById('after-shots'), k); document.getElementById('src-img').src = 'photos-test/' + k + '/0.jpg'; }
+show('mate');
 </script>
 </body>
 </html>

@@ -59,13 +59,18 @@ window.MT = {
     for (var i = 1; i <= n; i++) slides.push({ img: 'cases/' + id + '/' + (i < 10 ? '0' : '') + i + '.jpg' });
     MT.carousel(el, { brand: c.handle, sub: 'Test carousel · not a client', slides: slides });
   },
-  shotList: [
-    ['Front', '50% 18%', ''], ['Three-quarter', '38% 22%', ''], ['Side', '62% 22%', 'scaleX(-1)'], ['Back', '50% 30%', 'scaleX(-1)'],
-    ['In motion', '45% 55%', ''], ['Full look', '55% 70%', ''], ['No model', '', '', 'flat'], ['Close-up', '48% 38%', '', 'close']
-  ],
-  shots: function (el, n) {
-    el.innerHTML = MT.shotList.slice(0, n || 8).map(function (s, i) {
-      return '<div class="shot ' + (s[3] || '') + '" style="' + (s[1] ? 'background-position:' + s[1] + ';' : '') + (s[2] ? 'transform:' + s[2] + ';' : '') + '"><span' + (s[2] === 'scaleX(-1)' ? ' style="transform:scaleX(-1)"' : '') + '><b>' + (i + 1) + '</b>' + s[0] + '</span></div>';
+  shotNames: ['Front', 'Three-quarter', 'Side', 'Back', 'In motion', 'Full look', 'No model', 'Close-up'],
+  // Our test catalog sets, made from one photo on each brand's public site (not clients)
+  photoSets: {
+    christydawn: { brand: 'Christy Dawn', product: 'The Dawn Dress' },
+    mate: { brand: 'Mate the Label', product: 'Organic Fleece Oversized Sweatshirt' },
+    setactive: { brand: 'Set Active', product: 'Nylon Puff Quarter Snap Jacket' },
+    taylorstitch: { brand: 'Taylor Stitch', product: 'The Jack shirt' }
+  },
+  shots: function (el, set, n) {
+    set = set || 'christydawn';
+    el.innerHTML = MT.shotNames.slice(0, n || 8).map(function (name, i) {
+      return '<div class="shot"><img src="photos-test/' + set + '/' + (i + 1) + '.jpg" alt="' + MT.photoSets[set].product + ', ' + name.toLowerCase() + '"' + (i > 3 ? ' loading="lazy"' : '') + '><span><b>' + (i + 1) + '</b>' + name + '</span></div>';
     }).join('');
   },
   sample: {
