@@ -18,6 +18,11 @@
   .ex .cta { width: 100%; text-align: center; margin-top: 1rem; }
   .filter-row { margin-top: 1.2rem; }
   .filter-row .eyebrow { text-align: center; margin-bottom: .7rem; }
+  .ex-photo { margin-top: 3.5rem; }
+  .ex-photo .meta { display: flex; justify-content: space-between; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: #888; margin-bottom: 1rem; border-bottom: 1px solid #343330; padding-bottom: .8rem; }
+  .ex-ba { display: grid; grid-template-columns: 1fr 3fr; gap: 2rem; align-items: start; }
+  .ex-ba .eyebrow { margin-bottom: .8rem; }
+  @media (max-width: 760px) { .ex-ba { grid-template-columns: 1fr; } .ex-ba .srcph { max-width: 16rem; } }
 </style>
 </head>
 <body data-page="examples">
@@ -27,12 +32,16 @@
   <div style="text-align:center">
     <div class="label">Examples</div>
     <h2 style="margin-top:1rem">Same service. Different brands.</h2>
-    <p class="lead" style="margin-bottom:1rem">Real carousels we made for US brands from their public sites, to test the service. Swipe any of them.</p>
+    <p class="lead" style="margin-bottom:1rem">Real carousels and catalog shots we made for US brands from their public sites, to test the service.</p>
     <p class="form-note" style="margin-bottom:1.5rem">These brands are not our clients and did not take part. Every fact comes from their site and reviews. A few missing angles were made by our service.</p>
   </div>
+  <div class="toggle" id="kind" style="display:flex;justify-content:center;margin:1.5rem auto 0;width:max-content"><button class="on" data-k="c">Carousels</button><button data-k="p">Catalog photos</button></div>
+  <div id="pane-c">
   <div class="filter-row"><div class="eyebrow">Type of brand</div><div class="chips" id="f-brand"></div></div>
   <div class="filter-row"><div class="eyebrow">Carousel</div><div class="chips" id="f-type"></div></div>
   <div class="ex-grid" id="grid"></div>
+  </div>
+  <div id="pane-p" hidden><div id="pgrid"></div></div>
 </section>
 <div id="mt-footer"></div>
 </div>
@@ -59,6 +68,22 @@ function draw() {
   });
 }
 draw();
+var pg = document.getElementById('pgrid');
+['christydawn', 'mate', 'setactive', 'taylorstitch'].forEach(function (k, i) {
+  var p = MT.photoSets[k], d = document.createElement('div'); d.className = 'ex-photo';
+  d.innerHTML = '<div class="meta"><span>' + p.brand + '</span><span>' + p.product + '</span></div>' +
+    '<div class="ex-ba"><div><div class="eyebrow">Before</div><div class="srcph"><img src="photos-test/' + k + '/0.jpg" alt="" loading="lazy"></div></div>' +
+    '<div><div class="eyebrow">After &middot; 8 shots</div><div class="shots" id="ps' + i + '"></div></div></div>';
+  pg.appendChild(d); MT.shots(document.getElementById('ps' + i), k);
+});
+document.querySelectorAll('#kind button').forEach(function (b) {
+  b.onclick = function () {
+    document.querySelectorAll('#kind button').forEach(function (z) { z.classList.toggle('on', z === b); });
+    document.getElementById('pane-c').hidden = b.dataset.k !== 'c';
+    document.getElementById('pane-p').hidden = b.dataset.k !== 'p';
+  };
+});
+if (location.hash === '#photos') document.querySelector('#kind button[data-k=p]').click();
 </script>
 </body>
 </html>

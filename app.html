@@ -23,7 +23,8 @@
       <a href="#plan">Plan</a>
       <a href="#new">New carousel</a>
       <a href="#editor">Carousels</a>
-      <a href="#photos">Product photos</a>
+      <a href="#photos">New shoot</a>
+      <a href="#shots">Photos</a>
       <a href="#products">Products</a>
       <a href="#brand">Brand</a>
       <a href="#results">Results</a>
@@ -31,7 +32,7 @@
       <a href="#settings">Settings</a>
       <a href="#onboarding" class="muted">Setup (first visit)</a>
     </nav>
-    <div class="quota">5 of 8 carousels left in October<div class="bar"><i style="width:37%"></i></div></div>
+    <div class="quota">Left in October:<br>5 carousels · 7 pieces · 6 reshoots<div class="bar"><i style="width:37%"></i></div></div>
   </aside>
 
   <main class="main">
@@ -105,11 +106,11 @@
   <section class="screen" id="s-editor">
     <div class="topbar"><div><div class="label">The Linen Day Dress · Fit &amp; size</div><h1>Edit and approve.</h1></div><span class="pill y">Draft</span></div>
     <div class="verdict"><b>2 things to fix before posting</b><ul><li>Slide 3: add the model&rsquo;s height (yellow note).</li><li>Slide 8: your returns policy is missing in Brand settings.</li></ul></div>
-    <div class="box" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.4rem"><span>This carousel is missing 3 shots: <b style="font-weight:500">back, side and a fabric close-up</b>. Make them on your model?</span><a class="cta sm solid" href="#photos">Make 3 shots · 2 free</a></div>
+    <div class="box" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.4rem"><span>This dress has <b style="font-weight:500">8 catalog shots</b>. Put any of them on a slide: <span class="price-free">free</span>. No catalog set yet for a piece? Make one in New shoot.</span><a class="cta sm solid" href="#shots">Pick from catalog shots</a></div>
     <div class="ed">
       <div>
         <div class="strip" id="strip"></div>
-        <p class="form-note">Click any text to edit it. Ask for a change in plain words under a slide, or redo just that slide.</p>
+        <p class="form-note">Text, font, color and background: free. Slide doesn&rsquo;t match the piece: redone free. A new image: 2 included per carousel, then $0.10. Rewrite with AI: $0.01.</p>
       </div>
       <div>
         <div class="eyebrow" style="margin-bottom:.7rem">In your profile grid</div>
@@ -130,32 +131,67 @@ Tap the tag to shop.</div>
     </div>
   </section>
 
-  <!-- 5b. Product photos -->
+  <!-- 5b. New shoot -->
   <section class="screen" id="s-photos">
-    <div class="topbar"><div><div class="label">Catalog photos · 6 of 10 pieces left in October</div><h1>Product photos.</h1></div><button class="cta solid">Upload a photo</button></div>
-    <div class="cols2" style="grid-template-columns:1fr 1.6fr">
+    <div class="topbar"><div><div class="label">Catalog photos · 7 of 10 pieces left in October</div><h1>New shoot.</h1></div></div>
+    <div class="cols2" style="grid-template-columns:1fr 1.3fr">
       <div class="box">
-        <h3>Nylon Puff Quarter Snap Jacket</h3>
-        <div class="eyebrow" style="margin:.4rem 0 .8rem">Your photo</div>
-        <div class="srcph" style="max-width:12rem;transform:none;box-shadow:none;margin:0"><img src="photos-test/setactive/0.jpg" alt=""></div>
-        <div class="eyebrow" style="margin:1.4rem 0 .4rem">Our picks for your brand</div>
-        <div class="list">
-          <div class="it"><span class="muted">Model</span><span>Maya · 5&rsquo;8&rdquo; · size S <a href="#" class="small">swap</a></span></div>
-          <div class="it"><span class="muted">Shoes</span><span>White sneakers <a href="#" class="small">swap</a></span></div>
-          <div class="it"><span class="muted">Bag</span><span>Canvas tote <a href="#" class="small">swap</a></span></div>
-          <div class="it"><span class="muted">Background</span><span>Warm studio beige <a href="#" class="small">swap</a></span></div>
+        <div class="eyebrow" style="margin-bottom:.8rem">1 · The piece</div>
+        <div class="upl">Drop a photo here, even from your phone<br><span class="small">or <a href="#">pick a product from Shopify</a></span></div>
+        <div style="display:grid;grid-template-columns:7rem 1fr;gap:1rem;align-items:center;margin-top:1.2rem">
+          <div class="srcph" style="max-width:7rem;transform:none;box-shadow:none;margin:0"><img src="photos-test/setactive/0.jpg" alt=""></div>
+          <div><b style="font-weight:400">Nylon Puff Quarter Snap Jacket</b><br><span class="muted small">1 photo · front</span><br><a href="#" class="small">Add more photos (back, details)</a></div>
         </div>
-        <p style="margin-top:1rem"><button class="cta sm">Make 8 shots</button></p>
       </div>
+      <div class="box">
+        <div class="eyebrow" style="margin-bottom:.4rem">2 · Our picks for your brand</div>
+        <div class="list">
+          <div class="it"><span class="muted">Model</span><span>Maya · 5&rsquo;8&rdquo; · size S <a href="#brand" class="small">swap</a></span></div>
+          <div class="it"><span class="muted">Shoes</span><span>White sneakers <a href="#" class="small">swap</a></span></div>
+          <div class="it"><span class="muted">Bag</span><span>Grey gym bag <a href="#" class="small">swap</a></span></div>
+          <div class="it"><span class="muted">Background</span><span>Light grey studio <a href="#" class="small">swap</a></span></div>
+          <div class="it"><span class="muted">Shots</span><span>All 8: front, three-quarter, side, back, in motion, full look, no model, close-up</span></div>
+        </div>
+        <p style="margin-top:1.2rem"><a class="cta solid" href="#shots">Make 8 shots · 1 of 7 pieces</a></p>
+        <p class="form-note">Each shot is checked against your photo before you see it: pockets, buttons, zip, color, print, skin tone.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5c. Photos: edit & approve -->
+  <section class="screen" id="s-shots">
+    <div class="topbar"><div><div class="label">Nylon Puff Quarter Snap Jacket · 8 shots</div><h1>Edit and approve.</h1></div><span class="pill g">Checked against your photo</span></div>
+    <div class="shoot-ed">
       <div>
-        <div class="eyebrow" style="margin-bottom:.8rem">Nylon Puff Quarter Snap Jacket · 8 shots · checked against your photo &#10003;</div>
         <div class="shots" id="app-shots"></div>
+        <p class="form-note">Click a shot to fix it. Every version is kept.</p>
         <div class="actions" style="margin-top:1.2rem;display:flex;gap:.6rem;flex-wrap:wrap">
-          <button class="cta solid sm">Send to Shopify</button>
+          <button class="cta solid sm" id="approve">Approve all 8</button>
+          <button class="cta sm">Send to Shopify</button>
           <button class="cta sm">Download · Shopify, Amazon, Instagram</button>
           <a class="cta ghost sm" href="#new">Make a carousel from these</a>
         </div>
-        <p class="form-note">Click a shot to redo it. Up to 3 free redos per shot.</p>
+      </div>
+      <div class="box fixp">
+        <div class="big-shot"><img id="fx-img" src="photos-test/setactive/1.jpg" alt=""></div>
+        <h3 id="fx-name" style="text-align:center">1 · Front</h3>
+        <div class="opt"><div class="hd"><b>Doesn&rsquo;t match the piece</b><span class="price-free">Free</span></div>
+          <p>Tick what&rsquo;s off. We reshoot it. 3 of 8 off and we redo the whole set.</p>
+          <div class="ticks"><label><input type="checkbox">Pockets</label><label><input type="checkbox">Buttons</label><label><input type="checkbox">Zip</label><label><input type="checkbox">Collar</label><label><input type="checkbox">Sleeves</label><label><input type="checkbox">Length</label><label><input type="checkbox">Color</label><label><input type="checkbox">Print</label><label><input type="checkbox">Skin tone</label></div>
+          <button class="cta sm">Reshoot · free</button></div>
+        <div class="opt"><div class="hd"><b>Fix one spot</b><span class="price-paid">$0.50</span></div>
+          <p>Circle a spot on the shot and say what to change. The rest stays.</p>
+          <input type="text" placeholder="No bag, remove the bracelet&hellip;">
+          <button class="cta sm">Fix spot · $0.50</button></div>
+        <div class="opt"><div class="hd"><b>Reshoot your way</b><span class="price-paid">1 reshoot · 6 left</span></div>
+          <p>Ask in plain words. You get 2 versions and keep one.</p>
+          <input type="text" placeholder="Hands in pockets, white sneakers&hellip;">
+          <button class="cta sm">Reshoot · 1 of 6 left</button></div>
+        <div class="opt"><div class="hd"><b>Background</b><span class="price-free">Free</span></div>
+          <p>On all 8 shots at once. The model and the piece stay as they are.</p>
+          <div class="ticks"><label><input type="radio" name="bg">White</label><label><input type="radio" name="bg" checked>Light grey</label><label><input type="radio" name="bg">Your color</label></div></div>
+        <div class="opt"><div class="hd"><b>Earlier versions</b><span class="price-free">Free</span></div>
+          <p>Go back to any version of this shot.</p></div>
       </div>
     </div>
   </section>
@@ -180,6 +216,7 @@ Tap the tag to shop.</div>
           <div class="it"><span class="muted">Top questions</span><span>See-through? Wrinkles?</span></div>
           <div class="it"><span class="muted">Return reasons</span><span>Too big (6), color (2)</span></div>
           <div class="it"><span class="muted">Promises</span><span>&ldquo;Not see-through&rdquo; · test photo &#10003;</span></div>
+          <div class="it"><span class="muted">Catalog shots</span><span>8 &#10003; · <a href="#shots" class="small">open</a></span></div>
         </div>
         <p style="margin-top:1rem"><button class="cta sm ghost">Upload fitting photos</button></p>
       </div>
@@ -200,6 +237,11 @@ Tap the tag to shop.</div>
         <div class="it"><span>Ana</span><span>5&rsquo;7&rdquo; · bust 34&rdquo; · waist 27&rdquo; · hips 37&rdquo; · usually S</span></div>
         <div class="it"><span>Maya</span><span>5&rsquo;3&rdquo; · bust 40&rdquo; · waist 33&rdquo; · hips 43&rdquo; · usually L</span></div>
         <p style="margin-top:.8rem"><button class="cta sm ghost">Add a model</button></p>
+      </div>
+      <div class="box list"><h3>Catalog look</h3>
+        <div class="it"><span class="muted">Your models</span><span>Ana, Maya · <a href="#" class="small">pick from our library</a></span></div>
+        <div class="it"><span class="muted">Background</span><span>Light grey studio</span></div>
+        <div class="it"><span class="muted">Styling</span><span>Sneakers, canvas tote, thin gold jewelry</span></div>
       </div>
       <div class="box list"><h3>Shipping &amp; returns</h3>
         <div class="it"><span class="muted">Free shipping</span><span>US orders over $100</span></div>
@@ -240,6 +282,7 @@ Tap the tag to shop.</div>
         <div class="it"><span>Growth</span><span>$99 / month · 8 carousels</span></div>
         <div class="it"><span>Next payment</span><span>Nov 1</span></div>
         <div class="it"><button class="pill">Change plan</button><button class="pill">Buy 1 carousel · $12</button></div>
+        <div class="it"><button class="pill">Buy 10 reshoots · $19</button><button class="pill">10 slide images · $10</button></div>
         <div class="it"><button class="pill r">Cancel subscription</button></div>
       </div>
       <div class="box list"><h3>Team</h3>
@@ -256,8 +299,19 @@ Tap the tag to shop.</div>
 <script>
 MT.shots(document.getElementById('app-shots'), 'setactive');
 (function () {
+  var shots = document.querySelectorAll('#app-shots .shot');
+  function pick(i) {
+    shots.forEach(function (x, j) { x.classList.toggle('on', j === i); });
+    document.getElementById('fx-img').src = 'photos-test/setactive/' + (i + 1) + '.jpg';
+    document.getElementById('fx-name').textContent = (i + 1) + ' · ' + MT.shotNames[i];
+  }
+  shots.forEach(function (x, i) { x.onclick = function () { pick(i); }; });
+  pick(0);
+  document.getElementById('approve').onclick = function () { shots.forEach(function (x) { x.classList.add('ok'); }); this.textContent = 'Approved'; };
+})();
+(function () {
   // Router
-  var screens = ['onboarding','today','plan','new','editor','photos','products','brand','results','settings'];
+  var screens = ['onboarding','today','plan','new','editor','photos','shots','products','brand','results','settings'];
   function route() {
     var h = (location.hash || '#today').slice(1); if (screens.indexOf(h) < 0) h = 'today';
     screens.forEach(function (s) { document.getElementById('s-' + s).classList.toggle('on', s === h); });
@@ -325,7 +379,7 @@ MT.shots(document.getElementById('app-shots'), 'setactive');
       ? '<div class="slide paper ' + (s.ink ? 'ink' : '') + '"><div class="inner"><div><div class="k">' + s.k + '</div><div class="v" contenteditable="true" style="margin-top:.5rem;font-size:1.05rem">' + s.v + '</div></div><div>' + s.rows.map(function (r) { return '<div class="row" style="font-size:.62rem"><span>' + r[0] + '</span><b>' + r[1] + '</b></div>'; }).join('') + '</div></div></div>'
       : '<div class="slide"><div class="ph" style="background-position:' + s.p + '"></div><div class="shade"></div>' + (s.price ? '<div class="price">' + s.price + '</div>' : '') + '<div class="txt"><div class="big" contenteditable="true" style="font-size:1.1rem">' + s.big + '</div>' + (s.sub ? '<div class="sub" style="font-size:.6rem">' + s.sub + '</div>' : '') + '</div></div>';
     var d = document.createElement('div'); d.className = 'es';
-    d.innerHTML = inner + '<div class="bar2"><span>' + (i + 1) + ' / 8</span><button>Redo this slide</button></div><div class="ask"><input placeholder="Ask: make the background lighter"></div>';
+    d.innerHTML = inner + '<div class="bar2"><span>' + (i + 1) + ' / 8</span><button>New image · 2 free left</button></div><div class="ask"><input placeholder="Ask: make the background lighter"></div>';
     st.appendChild(d);
   });
 })();
