@@ -12,30 +12,30 @@
 <link rel="stylesheet" href="mt.css">
 <style>
   .steps { display: flex; justify-content: center; gap: 2.2rem; margin: 2.5rem 0 3.5rem; flex-wrap: wrap; }
-  .steps span { font-size: .68rem; letter-spacing: .25em; text-transform: uppercase; color: #555; }
+  .steps span { font-size: .68rem; letter-spacing: .25em; text-transform: uppercase; color: #6b6965; }
   .steps span.on { color: #f5f5f5; }
   .steps span.done { color: #888; }
   .pane { display: none; max-width: 980px; margin: 0 auto; }
   .pane.on { display: block; }
   .found { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; }
-  .kit { border: 1px solid #1a1a1a; padding: 1.8rem; }
-  .kit .row { display: flex; justify-content: space-between; border-top: 1px solid #1a1a1a; padding: .7rem 0; font-size: .88rem; color: #aaa; }
-  .swatch { display: inline-block; width: 16px; height: 16px; border: 1px solid #333; margin-left: 4px; vertical-align: middle; }
+  .kit { border: 1px solid #2c2b29; padding: 1.8rem; }
+  .kit .row { display: flex; justify-content: space-between; border-top: 1px solid #2c2b29; padding: .7rem 0; font-size: .88rem; color: #aaa; }
+  .swatch { display: inline-block; width: 16px; height: 16px; border: 1px solid #45433f; margin-left: 4px; vertical-align: middle; }
   .prods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  .prod { border: 1px solid #1a1a1a; cursor: pointer; transition: border-color .2s; background: transparent; color: inherit; text-align: left; font-family: inherit; }
-  .prod:hover { border-color: #555; }
+  .prod { border: 1px solid #2c2b29; cursor: pointer; transition: border-color .2s; background: transparent; color: inherit; text-align: left; font-family: inherit; }
+  .prod:hover { border-color: #6b6965; }
   .prod.on { border-color: #f5f5f5; }
   .prod .im { aspect-ratio: 4/5; background: url(../assets/lea-hero-poster.jpg) center/cover; }
   .prod .nm { padding: .7rem .8rem; font-size: .8rem; }
   .prod .pr { color: #777; font-size: .75rem; }
   .log { max-width: 520px; margin: 2rem auto 0; }
-  .log div { padding: .7rem 0; border-bottom: 1px solid #1a1a1a; font-size: .9rem; color: #555; display: flex; justify-content: space-between; }
+  .log div { padding: .7rem 0; border-bottom: 1px solid #2c2b29; font-size: .9rem; color: #6b6965; display: flex; justify-content: space-between; }
   .log div.done { color: #aaa; }
   .log div.done::after { content: '\2713'; color: #f5f5f5; }
   .log div.now { color: #f5f5f5; }
   .log div.now::after { content: '\2026'; }
   .result { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-  .caption { border: 1px solid #1a1a1a; padding: 1.4rem; font-size: .88rem; color: #aaa; white-space: pre-line; margin: 1.2rem 0 1.5rem; }
+  .caption { border: 1px solid #2c2b29; padding: 1.4rem; font-size: .88rem; color: #aaa; white-space: pre-line; margin: 1.2rem 0 1.5rem; }
   .plan-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; margin: 1rem 0 1.5rem; }
   .plan-row div { aspect-ratio: 4/5; background: url(../assets/lea-hero-poster.jpg) center/cover; position: relative; }
   .plan-row div span { position: absolute; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.65); font-size: .6rem; letter-spacing: .1em; padding: .35rem .4rem; text-transform: uppercase; }
@@ -73,7 +73,7 @@
         <div class="eyebrow" style="margin-bottom:1rem">Here&rsquo;s how we read your brand</div>
         <div class="row"><span>Brand</span><b id="brandName" style="font-weight:400;color:#f5f5f5">yourbrand</b></div>
         <div class="row"><span>Type</span><span style="color:#f5f5f5">Womenswear · occasion</span></div>
-        <div class="row"><span>Colors</span><span><i class="swatch" style="background:#0a0a0a"></i><i class="swatch" style="background:#efe9df"></i><i class="swatch" style="background:#8c7b67"></i></span></div>
+        <div class="row"><span>Colors</span><span><i class="swatch" style="background:#1a1918"></i><i class="swatch" style="background:#efe9df"></i><i class="swatch" style="background:#8c7b67"></i></span></div>
         <div class="row"><span>Voice</span><span style="color:#f5f5f5">Warm, light humour</span></div>
         <div class="row"><span>Shipping</span><span style="color:#f5f5f5">Free over $100</span></div>
         <div class="row"><span>Returns</span><span style="color:#f5f5f5">30 days, refund</span></div>
