@@ -23,6 +23,7 @@
       <a href="#plan">Plan</a>
       <a href="#new">New carousel</a>
       <a href="#editor">Carousels</a>
+      <a href="#photos">Product photos</a>
       <a href="#products">Products</a>
       <a href="#brand">Brand</a>
       <a href="#results">Results</a>
@@ -104,6 +105,7 @@
   <section class="screen" id="s-editor">
     <div class="topbar"><div><div class="label">The Linen Day Dress · Fit &amp; size</div><h1>Edit and approve.</h1></div><span class="pill y">Draft</span></div>
     <div class="verdict"><b>2 things to fix before posting</b><ul><li>Slide 3: add the model&rsquo;s height (yellow note).</li><li>Slide 8: your returns policy is missing in Brand settings.</li></ul></div>
+    <div class="box" style="display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.4rem"><span>This carousel is missing 3 shots: <b style="font-weight:500">back, side and a fabric close-up</b>. Make them on your model?</span><a class="cta sm solid" href="#photos">Make 3 shots · 2 free</a></div>
     <div class="ed">
       <div>
         <div class="strip" id="strip"></div>
@@ -124,6 +126,36 @@ Tap the tag to shop.</div>
           <button class="cta">Schedule · Thu 12 PM ET</button>
           <button class="cta ghost">Download phone pack</button>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5b. Product photos -->
+  <section class="screen" id="s-photos">
+    <div class="topbar"><div><div class="label">Catalog photos · 6 of 10 pieces left in October</div><h1>Product photos.</h1></div><button class="cta solid">Upload a photo</button></div>
+    <div class="cols2" style="grid-template-columns:1fr 1.6fr">
+      <div class="box">
+        <h3>The Linen Day Dress</h3>
+        <div class="eyebrow" style="margin:.4rem 0 .8rem">Your photo</div>
+        <div class="srcph" style="max-width:12rem;transform:none;box-shadow:none;margin:0"></div>
+        <div class="eyebrow" style="margin:1.4rem 0 .4rem">Our picks for your brand</div>
+        <div class="list">
+          <div class="it"><span class="muted">Model</span><span>Ana · 5&rsquo;7&rdquo; · size S <a href="#" class="small">swap</a></span></div>
+          <div class="it"><span class="muted">Shoes</span><span>Tan leather slides <a href="#" class="small">swap</a></span></div>
+          <div class="it"><span class="muted">Bag</span><span>Straw tote <a href="#" class="small">swap</a></span></div>
+          <div class="it"><span class="muted">Background</span><span>Warm light grey <a href="#" class="small">swap</a></span></div>
+        </div>
+        <p style="margin-top:1rem"><button class="cta sm">Make 8 shots</button></p>
+      </div>
+      <div>
+        <div class="eyebrow" style="margin-bottom:.8rem">The Linen Day Dress · 8 shots · checked against your photo &#10003;</div>
+        <div class="shots" id="app-shots"></div>
+        <div class="actions" style="margin-top:1.2rem;display:flex;gap:.6rem;flex-wrap:wrap">
+          <button class="cta solid sm">Send to Shopify</button>
+          <button class="cta sm">Download · Shopify, Amazon, Instagram</button>
+          <a class="cta ghost sm" href="#new">Make a carousel from these</a>
+        </div>
+        <p class="form-note">Click a shot to redo it. Up to 3 free redos per shot.</p>
       </div>
     </div>
   </section>
@@ -222,9 +254,10 @@ Tap the tag to shop.</div>
 </div>
 <script src="mt.js"></script>
 <script>
+MT.shots(document.getElementById('app-shots'));
 (function () {
   // Router
-  var screens = ['onboarding','today','plan','new','editor','products','brand','results','settings'];
+  var screens = ['onboarding','today','plan','new','editor','photos','products','brand','results','settings'];
   function route() {
     var h = (location.hash || '#today').slice(1); if (screens.indexOf(h) < 0) h = 'today';
     screens.forEach(function (s) { document.getElementById('s-' + s).classList.toggle('on', s === h); });

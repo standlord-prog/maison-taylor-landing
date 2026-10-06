@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MAISON TAYLOR — Instagram carousels that sell your clothes</title>
-<meta name="description" content="Maison Taylor makes Instagram carousels that sell clothes, in your brand's style. Paste your store link and get a free 8-slide carousel for one of your products." />
+<meta name="description" content="Maison Taylor makes Instagram carousels and catalog photos that sell clothes, in your brand's style. Paste your store link and get a free 8-slide carousel for one of your products." />
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,6 +31,29 @@
     </div>
     <div id="hero-carousel"></div>
   </div>
+</section>
+
+<!-- 1b. Two services -->
+<section class="section">
+  <h2>Two services, one style.</h2>
+  <p class="lead">Carousels sell in your feed. Catalog photos sell on your product page. Both use the same model and styling, so your brand looks the same everywhere.</p>
+  <div class="services">
+    <div class="service">
+      <div class="label">01 · Carousels</div>
+      <h3>Instagram carousels that sell.</h3>
+      <p>8 slides for one product: fit, fabric, looks and price your buyers ask about. From $49 a month.</p>
+      <div id="svc-carousel" style="max-width:15rem"></div>
+      <a class="cta solid sm" href="free.html">Get a free carousel</a>
+    </div>
+    <div class="service">
+      <div class="label">02 · Catalog photos</div>
+      <h3>Eight catalog shots from any photo.</h3>
+      <p>Send a photo of a piece, even from your phone. Get it on a model: front, side, back, in motion, close-up. From $19 a piece.</p>
+      <div class="mini" id="svc-shots"></div>
+      <a class="cta ghost sm" href="photos.html">See catalog photos</a>
+    </div>
+  </div>
+  <p class="form-note" style="text-align:center;margin-top:1.6rem">Both together: Carousels + Photos, $229 a month instead of $248.</p>
 </section>
 
 <!-- 2. Before / after -->
@@ -127,6 +150,8 @@
 <script>
 MT.carousel(document.getElementById('hero-carousel'));
 MT.carousel(document.getElementById('after-carousel'));
+MT.carousel(document.getElementById('svc-carousel'), { brand: 'sample.studio', slides: [MT.sample.slides[0]] });
+MT.shots(document.getElementById('svc-shots'));
 var styles = [
   ['t-street', 'Streetwear', 'drop.club', [{kind:'photo',pos:'50% 20%',tag:'Drop 07 · Fri 12 PM ET',big:'drop 07. 300 pieces. no restock.',sub:'set a reminder →'}]],
   ['', 'Womenswear', 'sample.studio', [{kind:'photo',pos:'50% 30%',tag:'For the wedding guest',big:'The dress you’ll wear to three weddings this summer.',sub:'Swipe for fit →'}]],

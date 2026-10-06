@@ -2,8 +2,9 @@
 (function () {
   var page = document.body.getAttribute('data-page') || '';
   var links = [
+    ['index.html', 'Carousels', 'home'],
+    ['photos.html', 'Catalog photos', 'photos'],
     ['examples.html', 'Examples', 'examples'],
-    ['for-streetwear.html', 'For your brand', 'for'],
     ['pricing.html', 'Pricing', 'pricing'],
     ['signin.html', 'Sign in', 'signin'],
     ['free.html', 'Free carousel', 'free', 'nav-cta']
@@ -25,8 +26,8 @@
   if (foot) {
     foot.outerHTML =
       '<footer class="footer"><div class="footer-grid">' +
-      '<div><div class="footer-brand">Maison Taylor</div><p class="footer-tag">Instagram carousels that sell clothes, made in your brand’s style.</p></div>' +
-      '<div><h4>Product</h4><a href="free.html">Free carousel</a><a href="examples.html">Examples</a><a href="pricing.html">Pricing</a></div>' +
+      '<div><div class="footer-brand">Maison Taylor</div><p class="footer-tag">Instagram carousels and catalog photos that sell clothes, made in your brand’s style.</p></div>' +
+      '<div><h4>Product</h4><a href="index.html">Carousels</a><a href="photos.html">Catalog photos</a><a href="free.html">Free carousel</a><a href="examples.html">Examples</a><a href="pricing.html">Pricing</a></div>' +
       '<div><h4>For brands</h4><a href="for-streetwear.html">Streetwear</a><a href="for-streetwear.html">Womenswear</a><a href="for-streetwear.html">Activewear</a><a href="for-streetwear.html">Denim</a></div>' +
       '<div><h4>Company</h4><a href="mailto:hello@maison-taylor.com">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>' +
       '</div><div class="footer-bottom"><span>© 2026 Maison Taylor. All rights reserved.</span><span>Made for independent fashion brands.</span></div></footer>';
@@ -45,6 +46,15 @@
 
 /* Carousel mock: MT.carousel(el, {brand, theme, slides}) */
 window.MT = {
+  shotList: [
+    ['Front', '50% 18%', ''], ['Three-quarter', '38% 22%', ''], ['Side', '62% 22%', 'scaleX(-1)'], ['Back', '50% 30%', 'scaleX(-1)'],
+    ['In motion', '45% 55%', ''], ['Full look', '55% 70%', ''], ['No model', '', '', 'flat'], ['Close-up', '48% 38%', '', 'close']
+  ],
+  shots: function (el, n) {
+    el.innerHTML = MT.shotList.slice(0, n || 8).map(function (s, i) {
+      return '<div class="shot ' + (s[3] || '') + '" style="' + (s[1] ? 'background-position:' + s[1] + ';' : '') + (s[2] ? 'transform:' + s[2] + ';' : '') + '"><span' + (s[2] === 'scaleX(-1)' ? ' style="transform:scaleX(-1)"' : '') + '><b>' + (i + 1) + '</b>' + s[0] + '</span></div>';
+    }).join('');
+  },
   sample: {
     brand: 'sample.studio',
     slides: [
