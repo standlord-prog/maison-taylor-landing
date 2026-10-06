@@ -29,7 +29,7 @@
       </form>
       <p class="form-note">Free. No card. One carousel per store.</p>
     </div>
-    <div id="hero-carousel"></div>
+    <div><div id="hero-carousel"></div><p class="case-note">Test carousel we made for Set Active from their public site. Not a client.</p></div>
   </div>
 </section>
 
@@ -59,17 +59,17 @@
 <!-- 2. Before / after -->
 <section class="section">
   <h2>From a catalog photo to a carousel that sells.</h2>
-  <p class="lead">We start from what you already have: your product page, your photos, your reviews.</p>
+  <p class="lead">We start from what you already have: your product page, your photos, your reviews. A real example, made from Mate the Label&rsquo;s site.</p>
   <div class="grid3" style="align-items:center;grid-template-columns:1fr auto 1.4fr">
     <div class="card" style="text-align:center">
       <div class="eyebrow" style="margin-bottom:1rem">Before</div>
-      <div style="aspect-ratio:1;background:url(../assets/lea-hero-poster.jpg) center/cover;max-width:260px;margin:0 auto"></div>
-      <p style="margin-top:1rem">One product photo, a price and a size chart nobody reads.</p>
+      <img src="cases/mate-04/before.jpg" alt="" style="max-width:20rem;width:100%;margin:0 auto">
+      <p style="margin-top:1rem">A product page: photos, a price and a size chart nobody reads.</p>
     </div>
     <div class="flow-text"><span class="arrow">&rarr;</span></div>
     <div>
       <div class="eyebrow" style="text-align:center;margin-bottom:1rem">After · swipe</div>
-      <div id="after-carousel"></div>
+      <div id="after-carousel"></div><p class="case-note">Test carousel we made for Mate the Label from their public site. Not a client.</p>
     </div>
   </div>
 </section>
@@ -104,6 +104,7 @@
   <h2>Your brand doesn&rsquo;t look like anyone else&rsquo;s. Neither do your carousels.</h2>
   <p class="lead">Streetwear drops, linen dresses and running tights sell in different ways. We adapt covers, fonts, tone and proof to your type of brand.</p>
   <div class="grid3" id="styles"></div>
+  <p class="form-note" style="text-align:center;margin-top:1.6rem">Real carousels we made from these brands&rsquo; public sites to test the service. They are not our clients. Yellow marks are facts we check before posting.</p>
   <p style="text-align:center;margin-top:2.5rem"><a class="cta ghost" href="examples.html">See all examples</a></p>
 </section>
 
@@ -148,21 +149,15 @@
 </div>
 <script src="mt.js"></script>
 <script>
-MT.carousel(document.getElementById('hero-carousel'));
-MT.carousel(document.getElementById('after-carousel'));
-MT.carousel(document.getElementById('svc-carousel'), { brand: 'sample.studio', slides: [MT.sample.slides[0]] });
+MT.real(document.getElementById('hero-carousel'), 'setactive-02');
+MT.real(document.getElementById('after-carousel'), 'mate-04');
+MT.real(document.getElementById('svc-carousel'), 'christydawn-03', 1);
 MT.shots(document.getElementById('svc-shots'));
-var styles = [
-  ['t-street', 'Streetwear', 'drop.club', [{kind:'photo',pos:'50% 20%',tag:'Drop 07 · Fri 12 PM ET',big:'drop 07. 300 pieces. no restock.',sub:'set a reminder →'}]],
-  ['', 'Womenswear', 'sample.studio', [{kind:'photo',pos:'50% 30%',tag:'For the wedding guest',big:'The dress you’ll wear to three weddings this summer.',sub:'Swipe for fit →'}]],
-  ['t-sport', 'Activewear', 'move.lab', [{kind:'photo',pos:'40% 60%',tag:'Squat-proof',big:'Tested in a squat. Not see-through.',sub:'7/8 length on 5’3” to 5’10” →'}]]
-];
-var box = document.getElementById('styles');
-styles.forEach(function (s, i) {
+[['taylorstitch-14', 'Menswear'], ['christydawn-03', 'Womenswear'], ['setactive-13', 'Activewear']].forEach(function (s, i) {
   var d = document.createElement('div');
-  d.innerHTML = '<div class="eyebrow" style="text-align:center;margin-bottom:1rem">' + s[1] + '</div><div id="st' + i + '"></div>';
-  box.appendChild(d);
-  MT.carousel(document.getElementById('st' + i), { theme: s[0], brand: s[2], slides: s[3] });
+  d.innerHTML = '<div class="eyebrow" style="text-align:center;margin-bottom:1rem">' + s[1] + ' · ' + MT.cases[s[0]].brand + '</div><div id="st' + i + '"></div>';
+  document.getElementById('styles').appendChild(d);
+  MT.real(document.getElementById('st' + i), s[0]);
 });
 </script>
 </body>

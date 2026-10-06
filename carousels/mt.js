@@ -46,6 +46,19 @@
 
 /* Carousel mock: MT.carousel(el, {brand, theme, slides}) */
 window.MT = {
+  // Real test carousels, made from each brand's public site (these brands are not clients)
+  cases: {
+    'setactive-02': { brand: 'Set Active', handle: 'setactive', n: 9, b: 'Activewear', t: 'One item, 5 looks', why: '<b>One pair of sweats, five outfits,</b> each with what to pair it with and the price.' },
+    'setactive-13': { brand: 'Set Active', handle: 'setactive', n: 9, b: 'Activewear', t: 'You asked, we answered', why: '<b>Real buyer questions</b> from reviews, answered with heights, sizes and photos.' },
+    'christydawn-03': { brand: 'Christy Dawn', handle: 'christydawn', n: 10, b: 'Womenswear', t: 'Fit & size', why: '<b>Three women, three heights</b> in the same dress, then the length chart.' },
+    'taylorstitch-14': { brand: 'Taylor Stitch', handle: 'taylorstitch', n: 10, b: 'Menswear', t: 'Fit guide', why: '<b>Measure a pair you own</b> and find your cut, step by step.' },
+    'mate-04': { brand: 'Mate the Label', handle: 'matethelabel', n: 10, b: 'Premium / eco', t: 'Fabric & quality', why: '<b>What it&rsquo;s made of, how it fits, how to wash it.</b> Certificates instead of claims.' }
+  },
+  real: function (el, id, max) {
+    var c = MT.cases[id], n = Math.min(c.n, max || c.n), slides = [];
+    for (var i = 1; i <= n; i++) slides.push({ img: 'cases/' + id + '/' + (i < 10 ? '0' : '') + i + '.jpg' });
+    MT.carousel(el, { brand: c.handle, sub: 'Test carousel · not a client', slides: slides });
+  },
   shotList: [
     ['Front', '50% 18%', ''], ['Three-quarter', '38% 22%', ''], ['Side', '62% 22%', 'scaleX(-1)'], ['Back', '50% 30%', 'scaleX(-1)'],
     ['In motion', '45% 55%', ''], ['Full look', '55% 70%', ''], ['No model', '', '', 'flat'], ['Close-up', '48% 38%', '', 'close']
@@ -71,9 +84,11 @@ window.MT = {
   carousel: function (el, data) {
     data = data || MT.sample;
     var n = data.slides.length;
-    var html = '<div class="ig ' + (data.theme || '') + '"><div class="ig-head"><div class="ig-ava" style="background-image:url(../assets/lea-hero-poster.jpg)"></div><div><div class="ig-name">' + (data.brand || 'your.brand') + '</div><div class="ig-sub">Sponsored · Shop</div></div></div><div class="ig-stage">' + (n > 1 ? '<span class="ig-count">1/' + n + '</span><button class="ig-arrow prev" aria-label="Previous">‹</button><button class="ig-arrow next" aria-label="Next">›</button>' : '') + '<div class="ig-track">';
-    data.slides.forEach(function (s) {
-      if (s.kind === 'photo') {
+    var html = '<div class="ig ' + (data.theme || '') + '"><div class="ig-head">' + (data.sub ? '<div class="ig-ava ini">' + (data.brand || '?').charAt(0).toUpperCase() + '</div>' : '<div class="ig-ava" style="background-image:url(../assets/lea-hero-poster.jpg)"></div>') + '<div><div class="ig-name">' + (data.brand || 'your.brand') + '</div><div class="ig-sub">' + (data.sub || 'Sponsored · Shop') + '</div></div></div><div class="ig-stage">' + (n > 1 ? '<span class="ig-count">1/' + n + '</span><button class="ig-arrow prev" aria-label="Previous">‹</button><button class="ig-arrow next" aria-label="Next">›</button>' : '') + '<div class="ig-track">';
+    data.slides.forEach(function (s, si) {
+      if (s.img) {
+        html += '<div class="slide"><img src="' + s.img + '" alt=""' + (si ? ' loading="lazy"' : '') + ' style="width:100%;height:100%;object-fit:cover"></div>';
+      } else if (s.kind === 'photo') {
         html += '<div class="slide"><div class="ph" style="background-position:' + (s.pos || 'center') + '"></div><div class="shade"></div>' +
           (s.tag ? '<div class="tag">' + s.tag + '</div>' : '') + (s.price ? '<div class="price">' + s.price + '</div>' : '') +
           '<div class="txt"><div class="big">' + s.big + '</div>' + (s.sub ? '<div class="sub">' + s.sub + '</div>' : '') + '</div></div>';
