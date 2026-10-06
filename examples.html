@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Examples — MAISON TAYLOR</title>
+<meta name="description" content="Instagram carousels for different kinds of fashion brands: streetwear, womenswear, activewear, denim and more." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mt.css">
+<style>
+  .ex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2.5rem 1.8rem; margin-top: 3rem; }
+  .ex .meta { display: flex; justify-content: space-between; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: #888; margin-bottom: .8rem; }
+  .ex .why { margin-top: 1rem; font-size: .85rem; color: #888; }
+  .ex .why b { color: #f5f5f5; font-weight: 400; }
+  .ex .cta { width: 100%; text-align: center; margin-top: 1rem; }
+  .filter-row { margin-top: 1.2rem; }
+  .filter-row .eyebrow { text-align: center; margin-bottom: .7rem; }
+</style>
+</head>
+<body data-page="examples">
+<div class="container">
+<div id="mt-nav"></div>
+<section class="section" style="border-bottom:0;padding-top:4rem">
+  <div style="text-align:center">
+    <div class="label">Examples</div>
+    <h2 style="margin-top:1rem">Same service. Different brands.</h2>
+    <p class="lead" style="margin-bottom:1rem">Real carousels we made for US brands from their public sites, to test the service. Swipe any of them.</p>
+    <p class="form-note" style="margin-bottom:1.5rem">These brands are not our clients and did not take part. Every fact comes from their site and reviews. A few missing angles were made by our service.</p>
+  </div>
+  <div class="filter-row"><div class="eyebrow">Type of brand</div><div class="chips" id="f-brand"></div></div>
+  <div class="filter-row"><div class="eyebrow">Carousel</div><div class="chips" id="f-type"></div></div>
+  <div class="ex-grid" id="grid"></div>
+</section>
+<div id="mt-footer"></div>
+</div>
+<script src="mt.js"></script>
+<script>
+var EX = ['setactive-02', 'christydawn-01', 'taylorstitch-14', 'mate-04', 'setactive-13'].map(function (id) { var c = MT.cases[id]; return { id: id, b: c.b, t: c.t, brand: c.brand, why: c.why }; });
+var fb = 'All', ft = 'All';
+function chips(id, list, set) {
+  var el = document.getElementById(id);
+  el.innerHTML = list.map(function (x) { return '<button class="chip' + (x === 'All' ? ' on' : '') + '">' + x + '</button>'; }).join('');
+  el.querySelectorAll('.chip').forEach(function (c) { c.onclick = function () { el.querySelectorAll('.chip').forEach(function (z) { z.classList.toggle('on', z === c); }); set(c.textContent); draw(); }; });
+}
+chips('f-brand', ['All', 'Womenswear', 'Menswear', 'Activewear', 'Premium / eco'], function (v) { fb = v; });
+chips('f-type', ['All', 'New drop', 'Fit guide', 'Fabric & quality', 'One item, 5 looks', 'You asked, we answered'], function (v) { ft = v; });
+function draw() {
+  var g = document.getElementById('grid'); g.innerHTML = '';
+  var list = EX.filter(function (e) { return (fb === 'All' || e.b === fb) && (ft === 'All' || e.t === ft); });
+  if (!list.length) { g.innerHTML = '<p class="muted" style="grid-column:1/-1;text-align:center">No example yet for this pair. <a href="free.html">Make one for your product</a>.</p>'; return; }
+  list.forEach(function (e, i) {
+    var d = document.createElement('div'); d.className = 'ex';
+    d.innerHTML = '<div class="meta"><span>' + e.brand + '</span><span>' + e.t + '</span></div><div id="c' + i + '"></div><p class="why">' + e.why + '</p><a class="cta ghost sm" href="free.html">Make this for my product</a>';
+    g.appendChild(d);
+    MT.real(document.getElementById('c' + i), e.id);
+  });
+}
+draw();
+</script>
+</body>
+</html>

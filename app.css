@@ -30,7 +30,7 @@ body.app { overflow-x: hidden; }
 .pill.r { border-color: #d0605e; color: #d0605e; }
 .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: .5rem; }
 .dot.g { background: #6fbf73; } .dot.y { background: #d9b44a; } .dot.r { background: #d0605e; }
-.thumb { width: 44px; height: 55px; background: url(../assets/lea-hero-poster.jpg) center/cover; flex: 0 0 auto; }
+.thumb { width: 44px; height: 55px; background: url(assets/lea-hero-poster.jpg) center/cover; flex: 0 0 auto; }
 table.t { width: 100%; border-collapse: collapse; font-size: .85rem; }
 table.t th { text-align: left; font-weight: 400; color: #777; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; padding: .7rem .6rem; border-bottom: 1px solid #2c2b29; }
 table.t td { padding: .8rem .6rem; border-bottom: 1px solid #252423; vertical-align: middle; }
@@ -65,14 +65,14 @@ table.t tr:hover td { background: #1f1e1d; }
 .type.on { border-color: #f5f5f5; }
 .type .mini { display: flex; gap: 3px; margin-bottom: .8rem; }
 .type .mini i { flex: 1; aspect-ratio: 4/5; background: #2c2b29; }
-.type .mini i:first-child { background: url(../assets/lea-hero-poster.jpg) center/cover; }
+.type .mini i:first-child { background: url(assets/lea-hero-poster.jpg) center/cover; }
 .type b { font-weight: 400; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; display: block; }
 .type small { color: #777; font-size: .72rem; display: block; margin-top: .3rem; }
 .type small.warn { color: #d9b44a; }
 .picks { display: flex; gap: .8rem; overflow-x: auto; padding-bottom: .5rem; }
 .pick { flex: 0 0 120px; border: 1px solid #2c2b29; cursor: pointer; background: transparent; color: inherit; font-family: inherit; text-align: left; padding: 0; }
 .pick.on { border-color: #f5f5f5; }
-.pick .im { aspect-ratio: 4/5; background: url(../assets/lea-hero-poster.jpg) center/cover; }
+.pick .im { aspect-ratio: 4/5; background: url(assets/lea-hero-poster.jpg) center/cover; }
 .pick .nm { padding: .5rem; font-size: .72rem; }
 
 /* Editor */
@@ -96,7 +96,7 @@ table.t tr:hover td { background: #1f1e1d; }
 .src { display: inline-block; font-family: 'Inter', sans-serif; font-size: .55rem; letter-spacing: .08em; background: rgba(0,0,0,.7); color: #fff; padding: .1rem .35rem; margin-left: .3rem; vertical-align: middle; text-transform: uppercase; }
 .slide.paper .src { background: #2c2b29; }
 .prev-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
-.prev-grid i { aspect-ratio: 4/5; background: #2c2b29 url(../assets/lea-hero-poster.jpg) center/cover; filter: grayscale(.6) brightness(.6); }
+.prev-grid i { aspect-ratio: 4/5; background: #2c2b29 url(assets/lea-hero-poster.jpg) center/cover; filter: grayscale(.6) brightness(.6); }
 .prev-grid i.me { filter: none; outline: 1px solid #f5f5f5; outline-offset: -1px; }
 .capbox { border: 1px solid #2c2b29; padding: 1rem; font-size: .82rem; color: #bbb; white-space: pre-line; outline: none; }
 .capbox:focus { border-color: #6b6965; }

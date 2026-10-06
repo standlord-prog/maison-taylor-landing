@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="robots" content="noindex">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MAISON TAYLOR — Prototype</title>
@@ -31,24 +32,6 @@
     top: 0;
     z-index: 100;
   }
-  .brand-link {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    text-decoration: none;
-    color: inherit;
-    transition: opacity 0.25s;
-    padding: 0.3rem 0.6rem 0.3rem 0;
-    border-radius: 4px;
-  }
-  .brand-link:hover { opacity: 0.7; }
-  .brand-link .back-arrow {
-    font-size: 1.1rem;
-    color: #888;
-    line-height: 1;
-    transition: transform 0.25s, color 0.25s;
-  }
-  .brand-link:hover .back-arrow { transform: translateX(-3px); color: #f5f5f5; }
   .brand {
     display: flex;
     align-items: center;
@@ -95,18 +78,11 @@
   .nav-pill.active { border-color: #f5f5f5; color: #f5f5f5; }
   .nav-pill:hover { border-color: #555; color: #ccc; }
 
-  .exit-prototype {
-    color: #888;
-    font-size: 0.7rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 0.5rem 0.9rem;
-    border: 1px solid #2a2a2a;
-    transition: all 0.2s;
-    font-family: 'Inter', sans-serif;
+  .user-badge {
+    color: #666;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
   }
-  .exit-prototype:hover { border-color: #f5f5f5; color: #f5f5f5; }
 
   /* VIEWS */
   .view { display: none; min-height: calc(100vh - 75px); }
@@ -1018,15 +994,12 @@
 
 <!-- HEADER -->
 <header>
-  <a href="/" class="brand-link" aria-label="Back to Maison Taylor home">
-    <span class="back-arrow" aria-hidden="true">←</span>
-    <div class="brand">
-      <div class="brand-text">
-        <span class="maison">Maison</span>
-        <span class="taylor">Taylor</span>
-      </div>
+  <div class="brand">
+    <div class="brand-text">
+      <span class="maison">Maison</span>
+      <span class="taylor">Taylor</span>
     </div>
-  </a>
+  </div>
   <div class="nav-pills">
     <button class="nav-pill" data-view="references">References</button>
     <button class="nav-pill active" data-view="generate">Generate</button>
@@ -1034,7 +1007,7 @@
     <button class="nav-pill" data-view="preorders">Pre-Orders</button>
     <button class="nav-pill" data-view="production">Production</button>
   </div>
-  <a href="/" class="exit-prototype" aria-label="Exit prototype to home">Exit demo ↗</a>
+  <div class="user-badge">yulia@maison-taylor.com</div>
 </header>
 
 <!-- VIEW: GENERATE (default, 3-column workspace) -->

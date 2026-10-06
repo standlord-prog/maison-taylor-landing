@@ -89,7 +89,7 @@ window.MT = {
   carousel: function (el, data) {
     data = data || MT.sample;
     var n = data.slides.length;
-    var html = '<div class="ig ' + (data.theme || '') + '"><div class="ig-head">' + (data.sub ? '<div class="ig-ava ini">' + (data.brand || '?').charAt(0).toUpperCase() + '</div>' : '<div class="ig-ava" style="background-image:url(../assets/lea-hero-poster.jpg)"></div>') + '<div><div class="ig-name">' + (data.brand || 'your.brand') + '</div><div class="ig-sub">' + (data.sub || 'Sponsored · Shop') + '</div></div></div><div class="ig-stage">' + (n > 1 ? '<span class="ig-count">1/' + n + '</span><button class="ig-arrow prev" aria-label="Previous">‹</button><button class="ig-arrow next" aria-label="Next">›</button>' : '') + '<div class="ig-track">';
+    var html = '<div class="ig ' + (data.theme || '') + '"><div class="ig-head">' + (data.sub ? '<div class="ig-ava ini">' + (data.brand || '?').charAt(0).toUpperCase() + '</div>' : '<div class="ig-ava" style="background-image:url(assets/lea-hero-poster.jpg)"></div>') + '<div><div class="ig-name">' + (data.brand || 'your.brand') + '</div><div class="ig-sub">' + (data.sub || 'Sponsored · Shop') + '</div></div></div><div class="ig-stage">' + (n > 1 ? '<span class="ig-count">1/' + n + '</span><button class="ig-arrow prev" aria-label="Previous">‹</button><button class="ig-arrow next" aria-label="Next">›</button>' : '') + '<div class="ig-track">';
     data.slides.forEach(function (s, si) {
       if (s.img) {
         html += '<div class="slide"><img src="' + s.img + '" alt=""' + (si ? ' loading="lazy"' : '') + ' style="width:100%;height:100%;object-fit:cover"></div>';

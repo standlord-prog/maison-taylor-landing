@@ -120,7 +120,7 @@ nav.top {
 
 /* Slide (4:5) */
 .slide { flex: 0 0 100%; scroll-snap-align: start; aspect-ratio: 4 / 5; position: relative; overflow: hidden; background: #e9e4dc; color: #222120; }
-.slide .ph { position: absolute; inset: 0; background: url(../assets/lea-hero-poster.jpg) center/cover no-repeat; }
+.slide .ph { position: absolute; inset: 0; background: url(assets/lea-hero-poster.jpg) center/cover no-repeat; }
 .slide .shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,.62) 100%); }
 .slide .txt { position: absolute; left: 8%; right: 8%; bottom: 8%; color: #fff; z-index: 2; }
 .slide .txt.top { top: 7%; bottom: auto; }
