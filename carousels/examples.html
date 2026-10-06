@@ -28,7 +28,7 @@
     <div class="label">Examples</div>
     <h2 style="margin-top:1rem">Same service. Different brands.</h2>
     <p class="lead" style="margin-bottom:1rem">Real carousels we made for US brands from their public sites, to test the service. Swipe any of them.</p>
-    <p class="form-note" style="margin-bottom:1.5rem">These brands are not our clients and did not take part. Yellow marks are facts we check before posting.</p>
+    <p class="form-note" style="margin-bottom:1.5rem">These brands are not our clients and did not take part. Every fact comes from their site and reviews. A few missing angles were made by our service.</p>
   </div>
   <div class="filter-row"><div class="eyebrow">Type of brand</div><div class="chips" id="f-brand"></div></div>
   <div class="filter-row"><div class="eyebrow">Carousel</div><div class="chips" id="f-type"></div></div>
@@ -38,7 +38,7 @@
 </div>
 <script src="mt.js"></script>
 <script>
-var EX = ['setactive-02', 'christydawn-03', 'taylorstitch-14', 'mate-04', 'setactive-13'].map(function (id) { var c = MT.cases[id]; return { id: id, b: c.b, t: c.t, brand: c.brand, why: c.why }; });
+var EX = ['setactive-02', 'christydawn-01', 'taylorstitch-14', 'mate-04', 'setactive-13'].map(function (id) { var c = MT.cases[id]; return { id: id, b: c.b, t: c.t, brand: c.brand, why: c.why }; });
 var fb = 'All', ft = 'All';
 function chips(id, list, set) {
   var el = document.getElementById(id);
@@ -46,7 +46,7 @@ function chips(id, list, set) {
   el.querySelectorAll('.chip').forEach(function (c) { c.onclick = function () { el.querySelectorAll('.chip').forEach(function (z) { z.classList.toggle('on', z === c); }); set(c.textContent); draw(); }; });
 }
 chips('f-brand', ['All', 'Womenswear', 'Menswear', 'Activewear', 'Premium / eco'], function (v) { fb = v; });
-chips('f-type', ['All', 'Fit & size', 'Fit guide', 'Fabric & quality', 'One item, 5 looks', 'You asked, we answered'], function (v) { ft = v; });
+chips('f-type', ['All', 'New drop', 'Fit guide', 'Fabric & quality', 'One item, 5 looks', 'You asked, we answered'], function (v) { ft = v; });
 function draw() {
   var g = document.getElementById('grid'); g.innerHTML = '';
   var list = EX.filter(function (e) { return (fb === 'All' || e.b === fb) && (ft === 'All' || e.t === ft); });

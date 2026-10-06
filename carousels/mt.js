@@ -48,10 +48,10 @@
 window.MT = {
   // Real test carousels, made from each brand's public site (these brands are not clients)
   cases: {
-    'setactive-02': { brand: 'Set Active', handle: 'setactive', n: 9, b: 'Activewear', t: 'One item, 5 looks', why: '<b>One pair of sweats, five outfits,</b> each with what to pair it with and the price.' },
+    'setactive-02': { brand: 'Set Active', handle: 'setactive', n: 9, b: 'Activewear', t: 'One item, 5 looks', why: '<b>One pair of sweats, five outfits,</b> each with its price, then one table to save.' },
     'setactive-13': { brand: 'Set Active', handle: 'setactive', n: 9, b: 'Activewear', t: 'You asked, we answered', why: '<b>Real buyer questions</b> from reviews, answered with heights, sizes and photos.' },
-    'christydawn-03': { brand: 'Christy Dawn', handle: 'christydawn', n: 10, b: 'Womenswear', t: 'Fit & size', why: '<b>Three women, three heights</b> in the same dress, then the length chart.' },
-    'taylorstitch-14': { brand: 'Taylor Stitch', handle: 'taylorstitch', n: 10, b: 'Menswear', t: 'Fit guide', why: '<b>Measure a pair you own</b> and find your cut, step by step.' },
+    'christydawn-01': { brand: 'Christy Dawn', handle: 'christydawn', n: 10, b: 'Womenswear', t: 'New drop', why: '<b>A print is back.</b> The story, the fabric, a real review and the length chart in the brand&rsquo;s own voice.' },
+    'taylorstitch-14': { brand: 'Taylor Stitch', handle: 'taylorstitch', n: 9, b: 'Menswear', t: 'Fit guide', why: '<b>Measure a pair you own</b> and find your cut, step by step.' },
     'mate-04': { brand: 'Mate the Label', handle: 'matethelabel', n: 10, b: 'Premium / eco', t: 'Fabric & quality', why: '<b>What it&rsquo;s made of, how it fits, how to wash it.</b> Certificates instead of claims.' }
   },
   real: function (el, id, max) {
