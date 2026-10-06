@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Carousels for streetwear brands — MAISON TAYLOR</title>
+<meta name="description" content="Instagram carousels for streetwear drops: drop name, time, run size and community proof, in your brand style." />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mt.css">
+</head>
+<body data-page="for">
+<div class="container">
+<div id="mt-nav"></div>
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="label">For streetwear brands</div>
+      <h1>Carousels that sell out your drop.</h1>
+      <p class="tagline">Drop name, date and time on the cover. Run size and last drop&rsquo;s sell-out as proof. Short, lowercase, your voice.</p>
+      <form class="link-form" action="free.html" method="get">
+        <input class="field" name="store" type="url" placeholder="yourbrand.com" required>
+        <button class="cta solid" type="submit">Get my free carousel</button>
+      </form>
+      <p class="form-note">Free. One carousel per store.</p>
+    </div>
+    <div id="sw1"></div>
+  </div>
+</section>
+<section class="section">
+  <h2>How streetwear sells on Instagram.</h2>
+  <p class="lead">What we change when your brand is streetwear.</p>
+  <div class="grid4">
+    <div class="card"><div class="num">— Cover —</div><h3>The drop, not the product</h3><p>Drop name, date and time with time zone: Fri 12 PM ET.</p></div>
+    <div class="card"><div class="num">— Voice —</div><h3>Short and lowercase</h3><p>Your captions, your slang. Learned from your last 50 posts.</p></div>
+    <div class="card"><div class="num">— Proof —</div><h3>Run size and sell-outs</h3><p>&ldquo;300 pieces&rdquo;, &ldquo;drop 06 sold out in 9 days&rdquo;. Stars don&rsquo;t matter here.</p></div>
+    <div class="card"><div class="num">— Ask —</div><h3>Set a reminder</h3><p>Save your size, set the drop time. One clear ask per carousel.</p></div>
+  </div>
+</section>
+<section class="section">
+  <h2>Carousels streetwear brands use most.</h2>
+  <div class="grid3" style="margin-top:2.5rem" id="sw-more"></div>
+</section>
+<section class="section" style="border-bottom:0;text-align:center">
+  <h2>See your next drop as a carousel.</h2>
+  <form class="link-form center" action="free.html" method="get" style="margin-top:2rem">
+    <input class="field" name="store" type="url" placeholder="yourbrand.com" required>
+    <button class="cta solid" type="submit">Get my free carousel</button>
+  </form>
+  <p class="form-note">Also for <a href="for-streetwear.html">womenswear</a>, <a href="for-streetwear.html">activewear</a>, <a href="for-streetwear.html">denim</a> and <a href="for-streetwear.html">premium brands</a>.</p>
+</section>
+<div id="mt-footer"></div>
+</div>
+<script src="mt.js"></script>
+<script>
+var drop = [
+  {kind:'photo',pos:'50% 20%',tag:'Drop 07 · Fri 12 PM ET',big:'drop 07. 300 pieces. no restock.',sub:'set a reminder \u2192'},
+  {kind:'photo',pos:'60% 60%',price:'$85',big:'heavyweight tee, 300 gsm',sub:'boxy on purpose'},
+  {kind:'paper',k:'fit',v:'boxy on purpose. take your usual size.',rows:[['Leo · 6\u20190\u201d · 170 lb','wearing L'],['drop 06','sold out in 9 days']]},
+  {kind:'ink',k:'drop 07',v:'Fri, Oct 16 · 12 PM ET',rows:[['$85 · S\u2013XXL','300 pieces'],['save your size','link in bio']]}
+];
+MT.carousel(document.getElementById('sw1'), { theme: 't-street', brand: 'drop.club', slides: drop });
+[['New drop', drop.slice(0,1)], ['Graphic story', [{kind:'photo',pos:'30% 40%',tag:'The print',big:'drawn by hand. 1 of 3 artists.',sub:'the story \u2192'}]], ['Fit & size', [{kind:'paper',k:'fit',v:'boxy on purpose. take your usual size.',rows:[['Leo · 6\u20190\u201d','wearing L'],['Sam · 5\u20199\u201d','wearing M']]}]]].forEach(function (x, i) {
+  var d = document.createElement('div'); d.innerHTML = '<div class="eyebrow" style="text-align:center;margin-bottom:1rem">' + x[0] + '</div><div id="m' + i + '"></div>';
+  document.getElementById('sw-more').appendChild(d);
+  MT.carousel(document.getElementById('m' + i), { theme: 't-street', brand: 'drop.club', slides: x[1] });
+});
+</script>
+</body>
+</html>

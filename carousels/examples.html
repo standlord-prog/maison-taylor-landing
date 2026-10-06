@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Examples — MAISON TAYLOR</title>
+<meta name="description" content="Instagram carousels for different kinds of fashion brands: streetwear, womenswear, activewear, denim and more." />
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mt.css">
+<style>
+  .ex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2.5rem 1.8rem; margin-top: 3rem; }
+  .ex .meta { display: flex; justify-content: space-between; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: #888; margin-bottom: .8rem; }
+  .ex .why { margin-top: 1rem; font-size: .85rem; color: #888; }
+  .ex .why b { color: #f5f5f5; font-weight: 400; }
+  .ex .cta { width: 100%; text-align: center; margin-top: 1rem; }
+  .filter-row { margin-top: 1.2rem; }
+  .filter-row .eyebrow { text-align: center; margin-bottom: .7rem; }
+</style>
+</head>
+<body data-page="examples">
+<div class="container">
+<div id="mt-nav"></div>
+<section class="section" style="border-bottom:0;padding-top:4rem">
+  <div style="text-align:center">
+    <div class="label">Examples</div>
+    <h2 style="margin-top:1rem">Same service. Different brands.</h2>
+    <p class="lead" style="margin-bottom:1.5rem">Filter by your type of brand or by the carousel you need. Swipe any of them.</p>
+  </div>
+  <div class="filter-row"><div class="eyebrow">Type of brand</div><div class="chips" id="f-brand"></div></div>
+  <div class="filter-row"><div class="eyebrow">Carousel</div><div class="chips" id="f-type"></div></div>
+  <div class="ex-grid" id="grid"></div>
+</section>
+<div id="mt-footer"></div>
+</div>
+<script src="mt.js"></script>
+<script>
+var EX = [
+  { b: 'Streetwear', t: 'New drop', theme: 't-street', brand: 'drop.club', why: '<b>Cover</b> names the drop and the time. <b>Proof</b> is the run size, not stars.', s: [
+    {kind:'photo',pos:'50% 20%',tag:'Drop 07 · Fri 12 PM ET',big:'drop 07. 300 pieces. no restock.',sub:'set a reminder \u2192'},
+    {kind:'photo',pos:'60% 60%',price:'$85',big:'heavyweight tee, 300 gsm',sub:'boxy on purpose'},
+    {kind:'paper',k:'fit',v:'boxy on purpose. take your usual size.',rows:[['Leo · 6\u20190\u201d · 170 lb','wearing L'],['drop 06','sold out in 9 days']]},
+    {kind:'ink',k:'drop 07',v:'Fri, Oct 16 · 12 PM ET',rows:[['$85 · S\u2013XXL','300 pieces'],['save your size','link in bio']]} ] },
+  { b: 'Womenswear', t: 'Fit & size', theme: '', brand: 'sample.studio', why: '<b>Every slide</b> answers one fit question: height, size, where the hem lands.', s: MT.sample.slides },
+  { b: 'Activewear', t: 'Fabric & quality', theme: 't-sport', brand: 'move.lab', why: '<b>Tested, not promised:</b> a squat test photo and the fabric spec.', s: [
+    {kind:'photo',pos:'40% 60%',tag:'Squat-proof',big:'Tested in a squat. Not see-through.',sub:'swipe for the test \u2192'},
+    {kind:'paper',k:'Fabric',v:'Nylon / spandex 75 / 25. Four-way stretch.',rows:[['Weight','240 GSM'],['Waistband','high, no roll-down']]},
+    {kind:'photo',pos:'70% 30%',big:'7/8 length on 5\u20193\u201d to 5\u201910\u201d',sub:'where it lands on each height'},
+    {kind:'ink',k:'The Studio Tight',v:'$78 · XS\u20133X · 4 colors',rows:[['Free 30-day returns','refund'],['DM FIT','we\u2019ll pick your length']]} ] },
+  { b: 'Denim', t: 'Fit & size', theme: 't-denim', brand: 'indigo.works', why: '<b>Back view</b> and rise on three heights. The question denim buyers ask most.', s: [
+    {kind:'photo',pos:'50% 75%',tag:'The Straight Leg',big:'Same jean. Three heights.',sub:'5\u20192\u201d · 5\u20196\u201d · 5\u201910\u201d \u2192'},
+    {kind:'paper',k:'Rise & inseam',v:'High rise. 30\u201d inseam.',rows:[['Rise','11\u201d, sits at navel'],['Back','no waist gap']]},
+    {kind:'ink',k:'The Straight Leg',v:'$128 · 23\u201334',rows:[['12 oz rigid denim','softens in 5 wears'],['Write your height','we\u2019ll pick your size']]} ] },
+  { b: 'Premium / eco', t: 'How it\u2019s made', theme: 't-eco', brand: 'field.wool', why: '<b>Origin and years of wear</b> sell here, not discounts.', s: [
+    {kind:'photo',pos:'50% 40%',tag:'How it\u2019s made',big:'One sweater. 14 hours by hand.',sub:'from the farm to you \u2192'},
+    {kind:'paper',k:'Wool',v:'Merino from one farm in Montana.',rows:[['Micron','17.5'],['Knit','12 gauge']]},
+    {kind:'ink',k:'Care guide',v:'Save it. It will last ten years.',rows:[['Wash','hand, cold'],['Repairs','free, for life']]} ] },
+  { b: 'Plus-size', t: 'Customers in our clothes', theme: 't-plus', brand: 'curve.co', why: '<b>Real buyers</b> in their own sizes, no &ldquo;flattering&rdquo;.', s: [
+    {kind:'photo',pos:'50% 30%',tag:'In your size',big:'Six women. Six sizes. One dress.',sub:'14 to 28 \u2192'},
+    {kind:'paper',k:'What buyers say',v:'\u201cFirst dress that fits my shoulders and hips.\u201d',rows:[['Maya · 5\u20195\u201d','wearing 2X'],['91% say','true to size']]},
+    {kind:'ink',k:'The Everyday Wrap',v:'$118 · 1X\u20134X',rows:[['Free exchanges','and refunds'],['Write your usual size','we\u2019ll help']]} ] }
+];
+var fb = 'All', ft = 'All';
+function chips(id, list, set) {
+  var el = document.getElementById(id);
+  el.innerHTML = list.map(function (x) { return '<button class="chip' + (x === 'All' ? ' on' : '') + '">' + x + '</button>'; }).join('');
+  el.querySelectorAll('.chip').forEach(function (c) { c.onclick = function () { el.querySelectorAll('.chip').forEach(function (z) { z.classList.toggle('on', z === c); }); set(c.textContent); draw(); }; });
+}
+chips('f-brand', ['All', 'Streetwear', 'Womenswear', 'Activewear', 'Denim', 'Premium / eco', 'Plus-size', 'Menswear', 'Kids', 'Swim & lingerie', 'Accessories'], function (v) { fb = v; });
+chips('f-type', ['All', 'New drop', 'Fit & size', 'Fabric & quality', 'One item, 5 looks', 'Customers in our clothes', 'How it\u2019s made', 'Gifts', 'Sale'], function (v) { ft = v; });
+function draw() {
+  var g = document.getElementById('grid'); g.innerHTML = '';
+  var list = EX.filter(function (e) { return (fb === 'All' || e.b === fb) && (ft === 'All' || e.t === ft); });
+  if (!list.length) { g.innerHTML = '<p class="muted" style="grid-column:1/-1;text-align:center">No example yet for this pair. <a href="free.html">Make one for your product</a>.</p>'; return; }
+  list.forEach(function (e, i) {
+    var d = document.createElement('div'); d.className = 'ex';
+    d.innerHTML = '<div class="meta"><span>' + e.b + '</span><span>' + e.t + '</span></div><div id="c' + i + '"></div><p class="why">' + e.why + '</p><a class="cta ghost sm" href="free.html">Make this for my product</a>';
+    g.appendChild(d);
+    MT.carousel(document.getElementById('c' + i), { theme: e.theme, brand: e.brand, slides: e.s });
+  });
+}
+draw();
+</script>
+</body>
+</html>
