@@ -8,7 +8,7 @@
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="mt.css">
 <style>
   .steps { display: flex; justify-content: center; gap: 2.2rem; margin: 2.5rem 0 3.5rem; flex-wrap: wrap; }
@@ -18,24 +18,24 @@
   .pane { display: none; max-width: 980px; margin: 0 auto; }
   .pane.on { display: block; }
   .found { display: grid; grid-template-columns: 1fr 2fr; gap: 2rem; }
-  .kit { border: 1px solid #2c2b29; padding: 1.8rem; }
-  .kit .row { display: flex; justify-content: space-between; border-top: 1px solid #2c2b29; padding: .7rem 0; font-size: .88rem; color: #aaa; }
-  .swatch { display: inline-block; width: 16px; height: 16px; border: 1px solid #45433f; margin-left: 4px; vertical-align: middle; }
+  .kit { border: 1px solid #343330; padding: 1.8rem; }
+  .kit .row { display: flex; justify-content: space-between; border-top: 1px solid #343330; padding: .7rem 0; font-size: .88rem; color: #aaa; }
+  .swatch { display: inline-block; width: 16px; height: 16px; border: 1px solid #4d4b46; margin-left: 4px; vertical-align: middle; }
   .prods { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-  .prod { border: 1px solid #2c2b29; cursor: pointer; transition: border-color .2s; background: transparent; color: inherit; text-align: left; font-family: inherit; }
+  .prod { border: 1px solid #343330; cursor: pointer; transition: border-color .2s; background: transparent; color: inherit; text-align: left; font-family: inherit; }
   .prod:hover { border-color: #6b6965; }
   .prod.on { border-color: #f5f5f5; }
   .prod .im { aspect-ratio: 4/5; background: url(../assets/lea-hero-poster.jpg) center/cover; }
   .prod .nm { padding: .7rem .8rem; font-size: .8rem; }
   .prod .pr { color: #777; font-size: .75rem; }
   .log { max-width: 520px; margin: 2rem auto 0; }
-  .log div { padding: .7rem 0; border-bottom: 1px solid #2c2b29; font-size: .9rem; color: #6b6965; display: flex; justify-content: space-between; }
+  .log div { padding: .7rem 0; border-bottom: 1px solid #343330; font-size: .9rem; color: #6b6965; display: flex; justify-content: space-between; }
   .log div.done { color: #aaa; }
   .log div.done::after { content: '\2713'; color: #f5f5f5; }
   .log div.now { color: #f5f5f5; }
   .log div.now::after { content: '\2026'; }
   .result { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
-  .caption { border: 1px solid #2c2b29; padding: 1.4rem; font-size: .88rem; color: #aaa; white-space: pre-line; margin: 1.2rem 0 1.5rem; }
+  .caption { border: 1px solid #343330; padding: 1.4rem; font-size: .88rem; color: #aaa; white-space: pre-line; margin: 1.2rem 0 1.5rem; }
   .plan-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: .6rem; margin: 1rem 0 1.5rem; }
   .plan-row div { aspect-ratio: 4/5; background: url(../assets/lea-hero-poster.jpg) center/cover; position: relative; }
   .plan-row div span { position: absolute; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,.65); font-size: .6rem; letter-spacing: .1em; padding: .35rem .4rem; text-transform: uppercase; }
