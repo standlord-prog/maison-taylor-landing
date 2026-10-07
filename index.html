@@ -29,9 +29,21 @@
       <p class="form-note">Free: one catalog shot and one carousel. No card. No link? <a href="free.html" style="color:inherit">Upload a photo</a>.</p>
     </div>
     <div>
-      <div class="eyebrow" style="text-align:center;margin-bottom:1rem">One photo in &rarr; eight shots out</div>
-      <div class="shots" id="hero-shots"></div>
-      <p class="case-note">Our test from one photo on Set Active&rsquo;s public site. Not a client.</p>
+      <div class="hero-video">
+        <div class="video-tag"><span class="live-dot"></span>Your brand&rsquo;s model</div>
+        <button class="video-sound-toggle" id="leaSoundToggle" aria-label="Unmute video" title="Tap for sound">
+          <svg class="icon-muted" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+          <svg class="icon-unmuted" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 010 7.07"/><path d="M19.07 4.93a10 10 0 010 14.14"/></svg>
+          <span class="sound-label">Tap for sound</span>
+        </button>
+        <video id="leaHeroVideo" autoplay muted loop playsinline poster="assets/lea-hero-poster.jpg" preload="metadata">
+          <source src="assets/lea-hero.mp4" type="video/mp4">
+        </video>
+        <div class="video-overlay">
+          <div class="video-caption-main">&mdash; Lea &mdash;<br><span class="sub">Maison Taylor model</span></div>
+          <div class="video-caption-meta">AI generated<br>For your catalog and feed</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -150,7 +162,17 @@
 </div>
 <script src="mt.js"></script>
 <script>
-MT.shots(document.getElementById('hero-shots'), 'setactive');
+(function () {
+  var v = document.getElementById('leaHeroVideo'), b = document.getElementById('leaSoundToggle');
+  b.onclick = function (e) {
+    e.preventDefault();
+    v.muted = !v.muted;
+    if (!v.muted) { v.volume = 1; v.currentTime = 0; v.play().catch(function () {}); }
+    b.classList.toggle('unmuted', !v.muted);
+    b.setAttribute('aria-label', v.muted ? 'Unmute video' : 'Mute video');
+    b.setAttribute('title', v.muted ? 'Tap for sound' : 'Mute');
+  };
+})();
 MT.shots(document.getElementById('chain-shots'), 'mate');
 MT.real(document.getElementById('after-carousel'), 'mate-04');
 MT.real(document.getElementById('svc-carousel'), 'christydawn-01', 1);
