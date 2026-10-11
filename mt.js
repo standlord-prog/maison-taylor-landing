@@ -57,7 +57,7 @@ window.MT = {
   real: function (el, id, max) {
     var c = MT.cases[id], n = Math.min(c.n, max || c.n), slides = [];
     for (var i = 1; i <= n; i++) slides.push({ img: 'cases/' + id + '/' + (i < 10 ? '0' : '') + i + '.jpg' });
-    MT.carousel(el, { brand: c.handle, sub: 'Test carousel · not a client', slides: slides });
+    MT.carousel(el, { brand: c.handle, sub: c.b, slides: slides });
   },
   shotNames: ['Front', 'Three-quarter', 'Side', 'Back', 'In motion', 'Full look', 'No model', 'Close-up'],
   // Our test catalog sets, made from one photo on each brand's public site (not clients)
