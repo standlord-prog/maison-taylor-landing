@@ -36,7 +36,8 @@
 <script src="live.js"></script>
 <script>
 if (new URLSearchParams(location.search).get('from') === 'free') {
-  document.getElementById('ttl').textContent = 'Your carousel is waiting.';
+  var want = new URLSearchParams(location.search).get('want');
+  document.getElementById('ttl').textContent = want === 'photo' ? 'Your catalog shot is waiting.' : want === 'carousel' ? 'Your carousel is waiting.' : 'Your free sample is waiting.';
   document.getElementById('lbl').textContent = 'Create your account';
 }
 document.getElementById('sf').onsubmit = function (e) { e.preventDefault(); document.getElementById('sent').style.display = 'block'; document.getElementById('note').style.display = 'none'; };
