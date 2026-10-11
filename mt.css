@@ -12,7 +12,7 @@ body {
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; }
-h1, h2, h3, .serif { font-family: 'Bodoni Moda', 'Didot', serif; font-weight: 400; }
+h1, h2, h3, .serif { font-family: 'Jost', 'Inter', sans-serif; font-weight: 300; }
 .container { max-width: 1680px; margin: 0 auto; padding: 0 clamp(1.5rem, 4vw, 5rem); }
 /* Scale up on big screens so the page fills the width */
 @media (min-width: 1440px) { html { font-size: 17px; } }
@@ -86,11 +86,11 @@ nav.top {
 @media (max-width: 560px) { .grid4 { grid-template-columns: 1fr; } }
 .card { border: 1px solid #343330; padding: 2.2rem 1.8rem; transition: border-color .3s, transform .3s; }
 .card:hover { border-color: #4d4b46; }
-.card .num { font-family: 'Bodoni Moda', 'Didot', serif; color: #6b6965; font-size: .9rem; letter-spacing: .2em; margin-bottom: 1rem; }
+.card .num { font-family: 'Jost', 'Inter', sans-serif; color: #6b6965; font-size: .9rem; letter-spacing: .2em; margin-bottom: 1rem; }
 .card h3 { font-size: 1.6rem; margin-bottom: .7rem; line-height: 1.15; }
 .card p { color: #888; font-size: .93rem; }
 .stat { text-align: center; padding: 2.4rem 1.4rem; border: 1px solid #343330; }
-.stat .number { font-family: 'Bodoni Moda', 'Didot', serif; font-size: 3.2rem; font-weight: 500; line-height: 1; margin-bottom: .7rem; }
+.stat .number { font-family: 'Jost', 'Inter', sans-serif; font-size: 3.2rem; font-weight: 300; line-height: 1; margin-bottom: .7rem; }
 .stat .label { text-transform: none; letter-spacing: .06em; font-size: .84rem; color: #777; line-height: 1.5; }
 .flow-text { text-align: center; font-family: 'Jost', 'Inter', sans-serif; font-weight: 300; font-size: 1.4rem; color: #aaa; line-height: 1.8; }
 .flow-text .hl { color: #f5f5f5; font-weight: 400; }
@@ -168,7 +168,7 @@ nav.top {
 .plan.pop { border-color: #f5f5f5; }
 .plan .badge { position: absolute; top: -.7rem; left: 1.6rem; background: #f5f5f5; color: #1a1918; font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; padding: .2rem .6rem; }
 .plan h3 { font-size: 1.7rem; }
-.plan .amt { font-family: 'Bodoni Moda', 'Didot', serif; font-size: 3.2rem; line-height: 1; margin: 1rem 0 .2rem; }
+.plan .amt { font-family: 'Jost', 'Inter', sans-serif; font-weight: 300; font-size: 3.2rem; line-height: 1; margin: 1rem 0 .2rem; }
 .plan .per { color: #777; font-size: .78rem; margin-bottom: 1.4rem; }
 .plan ul { list-style: none; color: #aaa; font-size: .88rem; margin-bottom: 2rem; flex: 1; }
 .plan li { padding: .45rem 0; border-top: 1px solid #2c2b29; }
@@ -181,7 +181,7 @@ table.cmp td:not(:first-child), table.cmp th:not(:first-child) { text-align: cen
 /* FAQ */
 .faq { max-width: 820px; margin: 0 auto; }
 .faq details { border-bottom: 1px solid #2c2b29; padding: 1.3rem 0; }
-.faq summary { cursor: pointer; font-family: 'Bodoni Moda', 'Didot', serif; font-size: 1.35rem; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
+.faq summary { cursor: pointer; font-family: 'Jost', 'Inter', sans-serif; font-weight: 300; font-size: 1.35rem; list-style: none; display: flex; justify-content: space-between; gap: 1rem; }
 .faq summary::after { content: '+'; color: #666; font-family: 'Inter', sans-serif; font-weight: 300; }
 .faq details[open] summary::after { content: '–'; }
 .faq p { color: #999; margin-top: .8rem; font-size: .95rem; max-width: 700px; }
