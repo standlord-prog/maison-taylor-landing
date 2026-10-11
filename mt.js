@@ -2,9 +2,8 @@
 (function () {
   var page = document.body.getAttribute('data-page') || '';
   var links = [
-    ['index.html', 'How it works', 'home'],
     ['photos.html', 'Catalog photos', 'photos'],
-    ['examples.html', 'Examples', 'examples'],
+    ['carousels.html', 'Carousels', 'carousels'],
     ['pricing.html', 'Pricing', 'pricing'],
     ['signin.html', 'Sign in', 'signin'],
     ['free.html', 'Free sample', 'free', 'nav-cta']
@@ -27,7 +26,7 @@
     foot.outerHTML =
       '<footer class="footer"><div class="footer-grid">' +
       '<div><div class="footer-brand">Maison Taylor</div><p class="footer-tag">Instagram carousels and catalog photos that sell clothes, made in your brand’s style.</p></div>' +
-      '<div><h4>Product</h4><a href="photos.html">Catalog photos</a><a href="index.html#carousels">Carousels</a><a href="free.html">Free sample</a><a href="examples.html">Examples</a><a href="pricing.html">Pricing</a></div>' +
+      '<div><h4>Product</h4><a href="photos.html">Catalog photos</a><a href="carousels.html">Carousels</a><a href="free.html">Free sample</a><a href="pricing.html">Pricing</a></div>' +
       '<div><h4>For brands</h4><a href="for-streetwear.html">Streetwear</a><a href="for-streetwear.html">Womenswear</a><a href="for-streetwear.html">Activewear</a><a href="for-streetwear.html">Denim</a></div>' +
       '<div><h4>Company</h4><a href="mailto:hello@maison-taylor.com">Contact</a><a href="/privacy.html">Privacy</a><a href="/terms.html">Terms</a></div>' +
       '</div><div class="footer-bottom"><span>© 2026 Maison Taylor. All rights reserved.</span><span>Made for independent fashion brands.</span></div></footer>';

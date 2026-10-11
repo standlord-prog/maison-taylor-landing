@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Instagram carousels — MAISON TAYLOR</title>
+<meta name="description" content="Instagram carousels that sell clothes: 8 slides per product on fit, fabric, looks and price, in your brand's style." />
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mt.css">
+<style>
+  .ex-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2.5rem 1.8rem; margin-top: 3rem; }
+  .ex .meta { display: flex; justify-content: space-between; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: #888; margin-bottom: .8rem; }
+  .ex .why { margin-top: 1rem; font-size: .85rem; color: #888; }
+  .ex .why b { color: #f5f5f5; font-weight: 400; }
+  .ex .cta { width: 100%; text-align: center; margin-top: 1rem; }
+  .filter-row { margin-top: 1.2rem; }
+  .filter-row .eyebrow { text-align: center; margin-bottom: .7rem; }
+  .ex-photo { margin-top: 3.5rem; }
+  .ex-photo .meta { display: flex; justify-content: space-between; font-size: .66rem; letter-spacing: .22em; text-transform: uppercase; color: #888; margin-bottom: 1rem; border-bottom: 1px solid #343330; padding-bottom: .8rem; }
+  .ex-ba { display: grid; grid-template-columns: 1fr 3fr; gap: 2rem; align-items: start; }
+  .ex-ba .eyebrow { margin-bottom: .8rem; }
+  @media (max-width: 760px) { .ex-ba { grid-template-columns: 1fr; } .ex-ba .srcph { max-width: 16rem; } }
+</style>
+</head>
+<body data-page="carousels">
+<div class="container">
+<div id="mt-nav"></div>
+
+<!-- 1. First screen -->
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <div class="label">Instagram carousels for fashion brands</div>
+      <h1>Carousels that sell the piece.</h1>
+      <p class="tagline">8 slides for one product: fit, fabric, looks and price, the things buyers ask about before they pay. Written from your product page and reviews, in your brand&rsquo;s colors and voice.</p>
+      <form class="link-form" action="free.html" method="get">
+        <input class="field" name="store" type="text" placeholder="Link to a product page or your store" required>
+        <input type="hidden" name="want" value="carousel"><button class="cta solid" type="submit">Try it free</button>
+      </form>
+      <p class="form-note">Free: one carousel for one of your products. No card.</p>
+    </div>
+    <div><div id="hero-carousel" style="max-width:22rem;margin:0 auto"></div></div>
+  </div>
+</section>
+
+<!-- 2. Examples -->
+<section class="section" id="examples">
+  <h2>Examples.</h2>
+  <p class="lead">Different brands, different kinds of carousels.</p>
+  <div class="filter-row"><div class="eyebrow">Type of brand</div><div class="chips" id="f-brand"></div></div>
+  <div class="filter-row"><div class="eyebrow">Carousel</div><div class="chips" id="f-type"></div></div>
+  <div class="ex-grid" id="grid"></div>
+</section>
+
+<!-- 3. Why it sells -->
+<section class="section">
+  <h2>Every slide answers a buyer&rsquo;s question.</h2>
+  <p class="lead">People don&rsquo;t buy clothes online when they can&rsquo;t tell the fit, the fabric or the price. Our carousels answer all three before they ask.</p>
+  <div class="grid4">
+    <div class="stat"><div class="number">92%</div><div class="label">of US shoppers check fit and size before buying clothes</div></div>
+    <div class="stat"><div class="number">48</div><div class="label">median interactions on a fashion carousel, vs 39 for Reels</div></div>
+    <div class="stat"><div class="number">9&times;</div><div class="label">more saves for carousels than for single photos</div></div>
+    <div class="stat"><div class="number">10 min</div><div class="label">from your store link to a ready carousel</div></div>
+  </div>
+  <p class="form-note" style="text-align:center;margin-top:1.6rem">Sources: PowerReviews 2023, Emplifi Q2 2026, Metricool 2026.</p>
+</section>
+
+<!-- 4. How it works -->
+<section class="section">
+  <h2>How it works.</h2>
+  <div class="grid4" style="margin-top:2.5rem">
+    <div class="card"><div class="num">— 01 —</div><h3>Send</h3><p>A link to a product page, your store or your Instagram. We read the product, its reviews and your feed, and learn your style.</p></div>
+    <div class="card"><div class="num">— 02 —</div><h3>Pick a type</h3><p>New drop, fit &amp; size, fabric, five looks, buyer questions and more: 16 types of carousels.</p></div>
+    <div class="card"><div class="num">— 03 —</div><h3>Get 8 slides</h3><p>Slides and a caption in about 10 minutes. Facts come only from your page and reviews. If one is missing, we ask.</p></div>
+    <div class="card"><div class="num">— 04 —</div><h3>Fix &amp; publish</h3><p>Edit words right on the slide for free. Then post to Instagram, schedule, or download.</p></div>
+  </div>
+</section>
+
+<!-- 5. Pricing in short -->
+<section class="section">
+  <h2>Priced per carousel.</h2>
+  <p class="lead">You always know how many carousels you get this month.</p>
+  <div class="grid4">
+    <div class="stat"><div class="number">$49</div><div class="label">Starter · 4 carousels a month</div></div>
+    <div class="stat" style="border-color:#f5f5f5"><div class="number">$99</div><div class="label">Growth · 8 carousels a month</div></div>
+    <div class="stat"><div class="number">$199</div><div class="label">Pro · 16 carousels a month</div></div>
+    <div class="stat"><div class="number">$399</div><div class="label">Agency · 32 carousels, 3 brands</div></div>
+  </div>
+  <p style="text-align:center;margin-top:2rem"><a class="cta ghost" href="pricing.html#carousels">Compare plans</a></p>
+</section>
+
+<!-- 6. FAQ -->
+<section class="section">
+  <h2>Questions.</h2>
+  <div class="faq" style="margin-top:2rem">
+    <details><summary>Where do the numbers on the slides come from?</summary><p>Only from your brand: your product page, your reviews, your fitting. If a fact is missing, the slide shows a note asking you for it. We never make facts up.</p></details>
+    <details><summary>Do I need a designer?</summary><p>No. You edit words right on the slide, or ask in plain words: &ldquo;make the background lighter&rdquo;.</p></details>
+    <details><summary>What if my photos are missing an angle?</summary><p>Every carousel includes 2 new images made from your photos. For a full set of shots on a model, see <a href="photos.html" style="color:inherit">catalog photos</a>.</p></details>
+    <details><summary>What if my store isn&rsquo;t on Shopify?</summary><p>Paste a link to any product page or to your Instagram. Shopify just lets us pull everything automatically.</p></details>
+    <details><summary>How do I cancel?</summary><p>In Settings, in one click. Your carousels stay yours.</p></details>
+  </div>
+</section>
+
+<!-- 7. Bottom field -->
+<section class="section" style="border-bottom:0;text-align:center">
+  <h2>See your product in a carousel.</h2>
+  <p class="lead">Get one carousel free.</p>
+  <form class="link-form center" action="free.html" method="get">
+    <input class="field" name="store" type="text" placeholder="yourbrand.com" required>
+    <input type="hidden" name="want" value="carousel"><button class="cta solid" type="submit">Try it free</button>
+  </form>
+</section>
+
+<div id="mt-footer"></div>
+</div>
+<script src="mt.js"></script>
+<script>
+MT.real(document.getElementById('hero-carousel'), 'mate-04');
+var EX = ['setactive-02', 'christydawn-01', 'taylorstitch-14', 'mate-04', 'setactive-13'].map(function (id) { var c = MT.cases[id]; return { id: id, b: c.b, t: c.t, why: c.why }; });
+var fb = 'All', ft = 'All';
+function chips(id, list, set) {
+  var el = document.getElementById(id);
+  el.innerHTML = list.map(function (x) { return '<button class="chip' + (x === 'All' ? ' on' : '') + '">' + x + '</button>'; }).join('');
+  el.querySelectorAll('.chip').forEach(function (c) { c.onclick = function () { el.querySelectorAll('.chip').forEach(function (z) { z.classList.toggle('on', z === c); }); set(c.textContent); draw(); }; });
+}
+chips('f-brand', ['All', 'Womenswear', 'Menswear', 'Activewear', 'Premium / eco'], function (v) { fb = v; });
+chips('f-type', ['All', 'New drop', 'Fit guide', 'Fabric & quality', 'One item, 5 looks', 'You asked, we answered'], function (v) { ft = v; });
+function draw() {
+  var g = document.getElementById('grid'); g.innerHTML = '';
+  var list = EX.filter(function (e) { return (fb === 'All' || e.b === fb) && (ft === 'All' || e.t === ft); });
+  if (!list.length) { g.innerHTML = '<p class="muted" style="grid-column:1/-1;text-align:center">No example yet for this pair. <a href="free.html?want=carousel">Make one for your product</a>.</p>'; return; }
+  list.forEach(function (e, i) {
+    var d = document.createElement('div'); d.className = 'ex';
+    d.innerHTML = '<div class="meta"><span>' + e.b + '</span><span>' + e.t + '</span></div><div id="c' + i + '"></div><p class="why">' + e.why + '</p><a class="cta ghost sm" href="free.html?want=carousel">Make this for my product</a>';
+    g.appendChild(d);
+    MT.real(document.getElementById('c' + i), e.id);
+  });
+}
+draw();
+</script>
+</body>
+</html>
