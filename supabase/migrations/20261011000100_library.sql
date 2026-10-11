@@ -74,6 +74,7 @@ create table public.brand_library (
   for_gender text check (for_gender in ('female', 'male', 'unisex')),  -- brands that sell both
   primary key (brand_id, item_id, role)
 );
+create unique index brand_library_one_per_role on public.brand_library (brand_id, role);  -- one item per role
 
 -- What a particular piece was styled with (copied from the style card when sent, can be swapped).
 create table public.piece_library (
@@ -129,8 +130,8 @@ begin
   if not exists (select 1 from library_items where id = item and status = 'approved' and (brand_id is null or brand_id = b)) then
     raise exception 'This item is not available';
   end if;
-  delete from brand_library where brand_id = b and role = r;
-  insert into brand_library (brand_id, item_id, role, shots) values (b, item, r, shot_list);
+  insert into brand_library (brand_id, item_id, role, shots) values (b, item, r, shot_list)
+  on conflict (brand_id, role) do update set item_id = excluded.item_id, shots = excluded.shots;
 end $$;
 revoke all on function public.set_brand_item(uuid, text, uuid, smallint[]) from public, anon;
 grant execute on function public.set_brand_item(uuid, text, uuid, smallint[]) to authenticated;
