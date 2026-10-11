@@ -29,6 +29,7 @@
 .op-form .field { padding: .55rem .7rem; font-size: .85rem; }
 .op-form select { background: #22211f; color: #ddd; border: 1px solid #4d4b46; padding: .5rem; font: inherit; }
 .op-msg { color: #d9b44a; font-size: .8rem; min-height: 1em; margin: .5rem 0; }
+.op-libph { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .3rem; } .op-libph img { width: 100%; aspect-ratio: 3/4; object-fit: cover; cursor: pointer; opacity: .75; } .op-libph img.on { opacity: 1; outline: 1px solid #d9b44a; } .op-libph select { width: 100%; font-size: .7rem; }
 .op-lib { display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: .8rem; }
 .op-lib .card { border: 1px solid #343330; padding: .6rem; font-size: .78rem; display: flex; flex-direction: column; gap: .35rem; }
 .op-lib .card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; background: #2d2c2a; }
@@ -114,7 +115,7 @@ label.op-chk { font-size: .75rem; color: #aaa; display: inline-flex; gap: .3rem;
   var ST = { draft: 'черновик', submitted: 'новый', in_work: 'в работе', ready: 'показан бренду', approved: 'утверждён' };
   var KIND = { mismatch: 'не совпадает с вещью', background: 'фон', tone: 'оттенок', spot_remove: 'убрать в месте', spot_replace: 'заменить в месте', redo: 'переснять по-своему' };
   var LIBKINDS = ['model', 'shoes', 'bag', 'jewelry', 'belt', 'hat', 'eyewear', 'top', 'bottom', 'outerwear', 'socks', 'background', 'prop'];
-  var ROLES = ['full_front', 'full_back', 'full_side', 'three_quarter', 'face', 'hair_back', 'product', 'on_body', 'detail', 'flat', 'plate'];
+  var ROLES = ['full_front', 'full_back', 'full_side', 'three_quarter', 'face', 'hair_back', 'product', 'on_body', 'detail', 'flat', 'plate', 'unsorted'];
   function err(box, e) { $(box).textContent = 'Ошибка: ' + (e.message || e); }
 
   L.requireUser().then(function (u) {
@@ -140,10 +141,10 @@ label.op-chk { font-size: .75rem; color: #aaa; display: inline-flex; gap: .3rem;
     ['submitted', 'in_work', 'ready', 'approved', 'draft'].forEach(function (s) {
       f.appendChild(E('button', { class: s === oFilter ? 'on' : '', text: ST[s], onclick: function () { oFilter = s; orders(); } }));
     });
-    sb.from('pieces').select('id, title, status, submitted_at, created_at, brands(name)').eq('status', oFilter).order('submitted_at', { ascending: true, nullsFirst: false }).then(function (r) {
+    sb.from('pieces').select('id, title, status, free_want, submitted_at, created_at, brands(name)').eq('status', oFilter).order('submitted_at', { ascending: true, nullsFirst: false }).then(function (r) {
       var t = $('o-list'); t.innerHTML = '<tr><th>Вещь</th><th>Бренд</th><th>Отправлен</th><th></th></tr>';
       (r.data || []).forEach(function (p) {
-        var tr = E('tr', {}, [E('td', { text: p.title }), E('td', { text: p.brands ? p.brands.name : '' }),
+        var tr = E('tr', {}, [E('td', { text: p.title + (p.free_want ? ' · бесплатно: ' + FREE[p.free_want] : '') }), E('td', { text: p.brands ? p.brands.name : '' }),
           E('td', { text: p.submitted_at ? new Date(p.submitted_at).toLocaleString() : '—' }),
           E('td', {}, [E('button', { class: 'op-btn', text: 'Открыть', onclick: function () { piece(p.id); } })])]);
         t.appendChild(tr);
@@ -151,6 +152,8 @@ label.op-chk { font-size: .75rem; color: #aaa; display: inline-flex; gap: .3rem;
       if (!(r.data || []).length) t.appendChild(E('tr', {}, [E('td', { colspan: '4', class: 'muted', text: 'Пусто.' })]));
     });
   }
+
+  var FREE = { photo: 'кадр', carousel: 'карусель', both: 'кадр и карусель' };
 
   // ---------- one piece ----------
   var pc = null;
@@ -164,7 +167,7 @@ label.op-chk { font-size: .75rem; color: #aaa; display: inline-flex; gap: .3rem;
     ]).then(function (rs) {
       pc = L.must(rs[0]); var src = L.must(rs[1]), shots = L.must(rs[2]), style = L.must(rs[3]);
       $('pc-brand').textContent = (pc.brands ? pc.brands.name : '') + (pc.product_url ? ' · ' + pc.product_url : '');
-      $('pc-title').textContent = pc.title; $('pc-status').textContent = ST[pc.status];
+      $('pc-title').textContent = pc.title + (pc.free_want ? ' · бесплатно: ' + FREE[pc.free_want] : ''); $('pc-status').textContent = ST[pc.status];
       $('pc-note').textContent = pc.note || '';
       var sbox = $('pc-src'); sbox.innerHTML = '';
       src.forEach(function (s) {
@@ -294,8 +297,24 @@ label.op-chk { font-size: .75rem; color: #aaa; display: inline-flex; gap: .3rem;
       E('span', { class: 'muted', text: it.slug + (it.brands ? ' · бренд ' + it.brands.name : '') }),
       attrs ? E('span', { class: 'muted', text: attrs }) : null,
       it.known_issues ? E('span', { style: 'color:#d9b44a', text: it.known_issues }) : null,
-      E('span', { class: 'muted', text: imgs.length + ' фото: ' + imgs.map(function (i) { return i.role; }).join(', ') }),
+      E('span', { class: 'muted', text: imgs.length + ' фото' }), libPhotos(it, imgs, msg),
       stat, role, file, add, msg]);
+  }
+  // Every photo of an item with its role; tap a photo to make it the main one.
+  function libPhotos(it, imgs, msg) {
+    return E('div', { class: 'op-libph' }, imgs.map(function (im) {
+      var t = E('img', { alt: im.role, title: im.is_primary ? 'главное фото' : 'сделать главным', class: im.is_primary ? 'on' : '', loading: 'lazy' });
+      L.fileUrl('library', im.storage_path).then(function (u) { t.src = u; });
+      t.onclick = function () {
+        if (im.is_primary) return;
+        sb.from('library_images').update({ is_primary: false }).eq('item_id', it.id).eq('is_primary', true)
+          .then(function (r) { L.must(r); return sb.from('library_images').update({ is_primary: true }).eq('id', im.id); })
+          .then(function (r) { L.must(r); library(); }).catch(function (e) { msg.textContent = e.message; });
+      };
+      var sel = E('select', {}, ROLES.map(function (r) { var o = E('option', { value: r, text: r }); if (r === im.role) o.selected = true; return o; }));
+      sel.onchange = function () { sb.from('library_images').update({ role: sel.value }).eq('id', im.id).then(function (r) { if (r.error) msg.textContent = r.error.message; }); };
+      return E('div', {}, [t, sel]);
+    }));
   }
   $('l-form').onsubmit = function (e) {
     e.preventDefault();

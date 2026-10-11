@@ -107,4 +107,13 @@ reset role;
 select pg_temp.as_user('bbbbbbbb-0000-0000-0000-000000000002');
 select pg_temp.expect((select count(*) = 0 from public.library_items where slug = 'a-own-bag'), 'B cannot see A own bag');
 reset role;
+-- Free sample: sent with only a link, one catalog shot, one per brand
+select pg_temp.as_user('bbbbbbbb-0000-0000-0000-000000000002');
+insert into public.pieces (brand_id, title, product_url, free_want) values (:'brand_b', 'Silk Dress', 'https://b.com/silk-dress', 'both') returning id as free_b \gset
+select public.submit_piece(:'free_b');
+select pg_temp.expect((select count(*) = 1 from public.shots where piece_id = :'free_b'), 'free sample gets one shot');
+select pg_temp.expect_error(format('insert into public.pieces (brand_id, title, free_want) values (%L, %L, %L)', :'brand_b', 'Again', 'photo'), 'second free sample');
+insert into public.pieces (brand_id, title) values (:'brand_b', 'No photo, no link') returning id as empty_b \gset
+select pg_temp.expect_error(format('select public.submit_piece(%L)', :'empty_b'), 'send with no photo and no link');
+reset role;
 \echo ALL ACCESS CHECKS PASSED

@@ -39,6 +39,8 @@ if (new URLSearchParams(location.search).get('from') === 'free') {
   var want = new URLSearchParams(location.search).get('want');
   document.getElementById('ttl').textContent = want === 'photo' ? 'Your catalog shot is waiting.' : want === 'carousel' ? 'Your carousel is waiting.' : 'Your free sample is waiting.';
   document.getElementById('lbl').textContent = 'Create your account';
+  // Kept for the studio: after sign-in it creates the free sample from this.
+  try { localStorage.setItem('mt_free', JSON.stringify({ want: want || 'both', store: new URLSearchParams(location.search).get('store') || '' })); } catch (e) {}
 }
 document.getElementById('sf').onsubmit = function (e) { e.preventDefault(); document.getElementById('sent').style.display = 'block'; document.getElementById('note').style.display = 'none'; };
 if (window.MTLive && MTLive.ready) {

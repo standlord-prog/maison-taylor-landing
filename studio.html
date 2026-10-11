@@ -75,7 +75,7 @@ button:focus-visible, .lv-shot:focus-visible { outline: 1px solid #f5f5f5; outli
     </section>
 
     <section id="v-new" hidden>
-      <div class="topbar"><div><div class="label">Catalog photos</div><h1>New shoot.</h1></div></div>
+      <div class="topbar"><div><div class="label" id="n-label">Catalog photos</div><h1 id="n-h1">New shoot.</h1></div></div>
       <form id="f-new" class="box" style="max-width:44rem;display:flex;flex-direction:column;gap:.8rem">
         <input class="field" id="n-title" placeholder="Piece name, e.g. Linen Shirt Dress, sand" required maxlength="200">
         <input class="field" id="n-url" placeholder="Product page link (optional)">
@@ -139,18 +139,26 @@ button:focus-visible, .lv-shot:focus-visible { outline: 1px solid #f5f5f5; outli
     approved: ['Approved', 'g', 'All 8 shots approved. You can still fix any shot.']
   };
 
+  // The free sample picked on free.html, kept through sign-in by signin.html.
+  var free = null;
+  try { free = JSON.parse(localStorage.getItem('mt_free') || 'null'); } catch (e) {}
+  if (free && free.store) { try { $('b-url').value = new URL(/^https?:/i.test(free.store) ? free.store : 'https://' + free.store).hostname.replace(/^www\./, ''); } catch (e) {} }
+
   L.requireUser().then(function (user) {
     if (!user) return;
     return sb.from('brand_members').select('brand_id, brands(id, name)').eq('user_id', user.id).limit(1).then(function (r) {
       var row = L.must(r)[0];
       if (!row) { show('v-brand'); return; }
       brand = row.brands; $('brand-name').textContent = brand.name;
-      return loadPieces().then(function () { pieces.length ? openPiece(pieces[0].id) : newShoot(); });
+      return loadPieces().then(function () {
+        if (free) return startFree();
+        pieces.length ? openPiece(pieces[0].id) : newShoot();
+      });
     });
   }).catch(function (e) { alert(e.message); });
 
   $('signout').onclick = function (e) { e.preventDefault(); sb.auth.signOut().then(function () { location.href = 'signin.html'; }); };
-  $('go-new').onclick = function (e) { e.preventDefault(); newShoot(); };
+  $('go-new').onclick = function (e) { e.preventDefault(); newShoot(null); };
 
   $('f-brand').onsubmit = function (e) {
     e.preventDefault();
@@ -172,10 +180,39 @@ button:focus-visible, .lv-shot:focus-visible { outline: 1px solid #f5f5f5; outli
     });
   }
 
+  // ---------- free sample ----------
+  // With a link we send it straight away (we take the photos from the page); without one the brand uploads a photo.
+  function titleFrom(u) {
+    try {
+      var x = new URL(/^https?:/i.test(u) ? u : 'https://' + u);
+      var t = decodeURIComponent(x.pathname.split('/').filter(Boolean).pop() || '').replace(/\.[a-z]+$/i, '').replace(/[-_]+/g, ' ').trim();
+      return t ? (t.charAt(0).toUpperCase() + t.slice(1)).slice(0, 200) : 'Free sample';
+    } catch (e) { return 'Free sample'; }
+  }
+  function startFree() {
+    var f = free; free = null;
+    try { localStorage.removeItem('mt_free'); } catch (e) {}
+    var want = ['photo', 'carousel', 'both'].indexOf(f.want) >= 0 ? f.want : 'both';
+    return sb.from('pieces').select('id').eq('brand_id', brand.id).not('free_want', 'is', null).limit(1).then(function (r) {
+      var had = L.must(r)[0];
+      if (had) return openPiece(had.id);
+      if (!f.store) return newShoot(want);
+      return sb.from('pieces').insert({ brand_id: brand.id, title: titleFrom(f.store), product_url: f.store, free_want: want })
+        .select('id').single().then(function (r) {
+          var p = L.must(r);
+          return sb.rpc('submit_piece', { p: p.id }).then(function () { return loadPieces(); }).then(function () { openPiece(p.id); });
+        });
+    });
+  }
+
   // ---------- new shoot ----------
-  var files = [];
-  function newShoot() {
-    cur = null; files = []; $('f-new').reset(); $('n-list').innerHTML = ''; $('n-msg').textContent = ''; show('v-new'); loadPieces();
+  var files = [], freeWant = null;
+  function newShoot(want) {
+    cur = null; files = []; freeWant = want || null; $('f-new').reset(); $('n-list').innerHTML = ''; $('n-msg').textContent = '';
+    $('n-label').textContent = freeWant ? 'Free sample' : 'Catalog photos';
+    $('n-h1').textContent = freeWant ? 'Your free sample.' : 'New shoot.';
+    $('n-send').textContent = freeWant ? 'Get my free sample' : 'Make 8 shots';
+    show('v-new'); loadPieces();
   }
   $('n-files').onchange = function () {
     Array.prototype.forEach.call(this.files, function (f) {
@@ -190,10 +227,10 @@ button:focus-visible, .lv-shot:focus-visible { outline: 1px solid #f5f5f5; outli
   };
   function saveNew(send) {
     var msg = $('n-msg');
-    if (send && !files.length) { msg.textContent = 'Add at least one photo of the piece.'; return; }
+    if (send && !files.length && !$('n-url').value.trim()) { msg.textContent = 'Add a photo of the piece or a link to its page.'; return; }
     msg.textContent = 'Saving…';
     var piece;
-    sb.from('pieces').insert({ brand_id: brand.id, title: $('n-title').value.trim(), product_url: $('n-url').value.trim() || null, note: $('n-note').value.trim() })
+    sb.from('pieces').insert({ brand_id: brand.id, title: $('n-title').value.trim(), product_url: $('n-url').value.trim() || null, note: $('n-note').value.trim(), free_want: freeWant })
       .select('id').single().then(function (r) {
         piece = L.must(r);
         return files.reduce(function (chain, it, i) {
@@ -226,10 +263,13 @@ button:focus-visible, .lv-shot:focus-visible { outline: 1px solid #f5f5f5; outli
     ]).then(function (rs) {
       cur = L.must(rs[0]); var src = L.must(rs[1]); shots = L.must(rs[2]);
       var st = STATUS[cur.status];
-      $('p-label').textContent = 'Catalog photos · ' + new Date(cur.created_at).toLocaleDateString();
+      $('p-label').textContent = (cur.free_want ? 'Free sample' : 'Catalog photos') + ' · ' + new Date(cur.created_at).toLocaleDateString();
       $('p-title').textContent = cur.title;
       $('p-status').textContent = st[0]; $('p-status').className = 'pill ' + st[1];
-      $('p-help').innerHTML = st[2];
+      $('p-help').innerHTML = cur.free_want && (cur.status === 'submitted' || cur.status === 'in_work')
+        ? 'We got your piece. Your free ' + { photo: 'catalog shot', carousel: 'carousel', both: 'catalog shot and carousel' }[cur.free_want] + ' will show up here, and we&rsquo;ll email you when it&rsquo;s ready.'
+        : st[2];
+      $('p-send').textContent = cur.free_want ? 'Get my free sample' : 'Make 8 shots';
       $('p-draft-actions').hidden = cur.status !== 'draft';
       var sbox = $('p-sources'); sbox.innerHTML = '';
       src.forEach(function (s) {
