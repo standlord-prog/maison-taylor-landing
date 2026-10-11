@@ -57,7 +57,7 @@ window.MT = {
   real: function (el, id, max) {
     var c = MT.cases[id], n = Math.min(c.n, max || c.n), slides = [];
     for (var i = 1; i <= n; i++) slides.push({ img: 'cases/' + id + '/' + (i < 10 ? '0' : '') + i + '.jpg' });
-    MT.carousel(el, { brand: c.handle, sub: 'Test carousel · not a client', slides: slides });
+    MT.carousel(el, { brand: c.handle, sub: c.b, slides: slides });
   },
   shotNames: ['Front', 'Three-quarter', 'Side', 'Back', 'In motion', 'Full look', 'No model', 'Close-up'],
   // Our test catalog sets, made from one photo on each brand's public site (not clients)
@@ -115,3 +115,17 @@ window.MT = {
     el.querySelector('.next').onclick = function () { track.scrollTo({ left: (cur() + 1) * track.clientWidth, behavior: 'smooth' }); };
   }
 };
+
+/* Edit mode: ?edit turns on pointing at elements to leave notes (pick.js), ?edit=off turns it off. */
+(function () {
+  var q = new URLSearchParams(location.search).get('edit'), on;
+  try {
+    if (q === 'off') localStorage.removeItem('mt_edit');
+    else if (q !== null) localStorage.setItem('mt_edit', '1');
+    on = localStorage.getItem('mt_edit') === '1';
+  } catch (e) { on = q !== null && q !== 'off'; }
+  if (!on) return;
+  var s = document.createElement('script');
+  s.src = 'pick.js';
+  document.body.appendChild(s);
+})();
