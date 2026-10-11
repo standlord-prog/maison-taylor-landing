@@ -115,3 +115,17 @@ window.MT = {
     el.querySelector('.next').onclick = function () { track.scrollTo({ left: (cur() + 1) * track.clientWidth, behavior: 'smooth' }); };
   }
 };
+
+/* Edit mode: ?edit turns on pointing at elements to leave notes (pick.js), ?edit=off turns it off. */
+(function () {
+  var q = new URLSearchParams(location.search).get('edit'), on;
+  try {
+    if (q === 'off') localStorage.removeItem('mt_edit');
+    else if (q !== null) localStorage.setItem('mt_edit', '1');
+    on = localStorage.getItem('mt_edit') === '1';
+  } catch (e) { on = q !== null && q !== 'off'; }
+  if (!on) return;
+  var s = document.createElement('script');
+  s.src = 'pick.js';
+  document.body.appendChild(s);
+})();
