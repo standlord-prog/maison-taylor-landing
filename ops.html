@@ -141,10 +141,10 @@ label.op-chk { font-size: .75rem; color: #aaa; display: inline-flex; gap: .3rem;
     ['submitted', 'in_work', 'ready', 'approved', 'draft'].forEach(function (s) {
       f.appendChild(E('button', { class: s === oFilter ? 'on' : '', text: ST[s], onclick: function () { oFilter = s; orders(); } }));
     });
-    sb.from('pieces').select('id, title, status, submitted_at, created_at, brands(name)').eq('status', oFilter).order('submitted_at', { ascending: true, nullsFirst: false }).then(function (r) {
+    sb.from('pieces').select('id, title, status, free_want, submitted_at, created_at, brands(name)').eq('status', oFilter).order('submitted_at', { ascending: true, nullsFirst: false }).then(function (r) {
       var t = $('o-list'); t.innerHTML = '<tr><th>Вещь</th><th>Бренд</th><th>Отправлен</th><th></th></tr>';
       (r.data || []).forEach(function (p) {
-        var tr = E('tr', {}, [E('td', { text: p.title }), E('td', { text: p.brands ? p.brands.name : '' }),
+        var tr = E('tr', {}, [E('td', { text: p.title + (p.free_want ? ' · бесплатно: ' + FREE[p.free_want] : '') }), E('td', { text: p.brands ? p.brands.name : '' }),
           E('td', { text: p.submitted_at ? new Date(p.submitted_at).toLocaleString() : '—' }),
           E('td', {}, [E('button', { class: 'op-btn', text: 'Открыть', onclick: function () { piece(p.id); } })])]);
         t.appendChild(tr);
@@ -152,6 +152,8 @@ label.op-chk { font-size: .75rem; color: #aaa; display: inline-flex; gap: .3rem;
       if (!(r.data || []).length) t.appendChild(E('tr', {}, [E('td', { colspan: '4', class: 'muted', text: 'Пусто.' })]));
     });
   }
+
+  var FREE = { photo: 'кадр', carousel: 'карусель', both: 'кадр и карусель' };
 
   // ---------- one piece ----------
   var pc = null;
@@ -165,7 +167,7 @@ label.op-chk { font-size: .75rem; color: #aaa; display: inline-flex; gap: .3rem;
     ]).then(function (rs) {
       pc = L.must(rs[0]); var src = L.must(rs[1]), shots = L.must(rs[2]), style = L.must(rs[3]);
       $('pc-brand').textContent = (pc.brands ? pc.brands.name : '') + (pc.product_url ? ' · ' + pc.product_url : '');
-      $('pc-title').textContent = pc.title; $('pc-status').textContent = ST[pc.status];
+      $('pc-title').textContent = pc.title + (pc.free_want ? ' · бесплатно: ' + FREE[pc.free_want] : ''); $('pc-status').textContent = ST[pc.status];
       $('pc-note').textContent = pc.note || '';
       var sbox = $('pc-src'); sbox.innerHTML = '';
       src.forEach(function (s) {
