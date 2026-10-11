@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Studio — MAISON TAYLOR</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mt.css">
+<link rel="stylesheet" href="app.css">
+<style>
+/* Live brand studio: catalog photos on the real server */
+.lv-list .it { cursor: pointer; }
+.lv-list .it.on b { color: #f5f5f5; }
+.lv-files { display: flex; flex-wrap: wrap; gap: .6rem; margin: .8rem 0; }
+.lv-file { width: 7rem; display: flex; flex-direction: column; gap: .3rem; font-size: .7rem; }
+.lv-file img { width: 100%; aspect-ratio: 3/4; object-fit: cover; background: #2d2c2a; }
+.lv-file select { background: transparent; color: #ccc; border: 1px solid #4d4b46; font: inherit; padding: .2rem; }
+.lv-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; }
+.lv-shot { position: relative; cursor: pointer; border: 1px solid #343330; background: #272624; padding: 0; color: inherit; font: inherit; text-align: left; }
+.lv-shot.on { border-color: #f5f5f5; }
+.lv-shot .im { aspect-ratio: 3/4; background: #2d2c2a center/cover; }
+.lv-shot .cap { padding: .45rem .55rem; font-size: .68rem; color: #999; display: flex; justify-content: space-between; gap: .4rem; }
+.lv-ed { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 1.6rem; margin-top: 1.6rem; align-items: start; }
+.lv-stage { position: relative; cursor: crosshair; max-width: 26rem; }
+.lv-stage img { display: block; width: 100%; }
+.lv-ring { position: absolute; border: 2px dashed #d9b44a; border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); }
+.lv-vers { display: flex; gap: .4rem; flex-wrap: wrap; margin-top: .7rem; }
+.lv-vers button { border: 1px solid #4d4b46; background: none; color: #aaa; font: inherit; font-size: .68rem; padding: .25rem .5rem; cursor: pointer; }
+.lv-vers button.on { border-color: #f5f5f5; color: #f5f5f5; }
+.lv-doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: .5rem; }
+.lv-door { border: 1px solid #4d4b46; background: none; color: #ddd; padding: .7rem; text-align: left; cursor: pointer; font: inherit; font-size: .8rem; display: flex; flex-direction: column; gap: .25rem; }
+.lv-door.on { border-color: #f5f5f5; background: #2d2c2a; }
+.lv-panel { border-top: 1px solid #343330; margin-top: 1rem; padding-top: 1rem; display: flex; flex-direction: column; gap: .7rem; }
+.lv-chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+.lv-chip { border: 1px solid #4d4b46; background: none; color: #aaa; padding: .25rem .6rem; font: inherit; font-size: .72rem; cursor: pointer; }
+.lv-chip.on { border-color: #f5f5f5; color: #f5f5f5; }
+.lv-msg { font-size: .8rem; color: #d9b44a; min-height: 1em; }
+.lv-reqs .it { font-size: .78rem; }
+button:focus-visible, .lv-shot:focus-visible { outline: 1px solid #f5f5f5; outline-offset: 2px; }
+@media (max-width: 900px) { .lv-ed { grid-template-columns: 1fr; } .lv-grid { grid-template-columns: repeat(2, 1fr); } .lv-doors { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body class="app">
+<div class="shell">
+  <aside class="side">
+    <a href="index.html" class="logo-link"><div class="logo"><span class="maison">Maison</span><span class="taylor">Taylor</span></div></a>
+    <div class="brandsw"><div><small>Brand</small><span id="brand-name">&hellip;</span></div></div>
+    <nav class="menu" id="menu">
+      <a href="#" id="go-new">New shoot</a>
+      <span class="sep"></span>
+      <div class="lv-list list" id="pieces"></div>
+      <span class="sep"></span>
+      <a href="#" id="signout" class="muted">Sign out</a>
+    </nav>
+  </aside>
+
+  <main class="main" id="main">
+    <section id="v-off" hidden>
+      <div class="topbar"><div><div class="label">Studio</div><h1>Not connected yet.</h1></div></div>
+      <p class="muted">The server settings are empty, so this page has nothing to show. Open the <a href="app.html">dashboard preview</a> instead.</p>
+    </section>
+
+    <section id="v-brand" hidden>
+      <div class="topbar"><div><div class="label">First visit</div><h1>What&rsquo;s your brand called?</h1></div></div>
+      <form id="f-brand" class="box" style="max-width:34rem;display:flex;flex-direction:column;gap:.8rem">
+        <input class="field" id="b-name" placeholder="Brand name" required maxlength="120">
+        <input class="field" id="b-url" placeholder="Your store, e.g. yourbrand.com (optional)">
+        <button class="cta solid sm" type="submit" style="align-self:flex-start">Continue</button>
+        <div class="lv-msg" id="b-msg"></div>
+      </form>
+    </section>
+
+    <section id="v-new" hidden>
+      <div class="topbar"><div><div class="label">Catalog photos</div><h1>New shoot.</h1></div></div>
+      <form id="f-new" class="box" style="max-width:44rem;display:flex;flex-direction:column;gap:.8rem">
+        <input class="field" id="n-title" placeholder="Piece name, e.g. Linen Shirt Dress, sand" required maxlength="200">
+        <input class="field" id="n-url" placeholder="Product page link (optional)">
+        <textarea class="field" id="n-note" rows="2" placeholder="Anything we should know: fit, details that must show (optional)"></textarea>
+        <label class="upl" for="n-files" style="cursor:pointer">Add photos of the piece: on a hanger, on the floor, on a person, from your phone.<br><span class="small">Front first. Back and close-ups help us get the details right.</span></label>
+        <input type="file" id="n-files" accept="image/*" multiple hidden>
+        <div class="lv-files" id="n-list"></div>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+          <button class="cta solid sm" type="submit" id="n-send">Make 8 shots</button>
+          <button class="cta ghost sm" type="button" id="n-draft">Save draft</button>
+        </div>
+        <div class="lv-msg" id="n-msg"></div>
+      </form>
+    </section>
+
+    <section id="v-piece" hidden>
+      <div class="topbar"><div><div class="label" id="p-label"></div><h1 id="p-title"></h1></div><span class="pill" id="p-status"></span></div>
+      <p class="muted" id="p-help"></p>
+      <div class="lv-files" id="p-sources"></div>
+      <div id="p-draft-actions" hidden style="margin:1rem 0"><button class="cta solid sm" id="p-send">Make 8 shots</button></div>
+      <div class="lv-grid" id="p-shots"></div>
+      <div class="lv-ed" id="p-ed" hidden>
+        <div>
+          <div class="lv-stage" id="e-stage"><img id="e-img" alt=""><div class="lv-ring" id="e-ring" hidden></div></div>
+          <div class="lv-vers" id="e-vers"></div>
+          <p class="form-note">Every version is kept. Going back to an earlier one is free.</p>
+        </div>
+        <div>
+          <div class="label" id="e-name" style="margin-bottom:.8rem"></div>
+          <div class="lv-doors">
+            <button class="lv-door" data-door="bad"><b>Doesn&rsquo;t match the piece</b><span class="muted small">Free</span></button>
+            <button class="lv-door" data-door="fix"><b>Fix one thing</b><span class="muted small">Free or $0.50</span></button>
+            <button class="lv-door" data-door="redo"><b>Reshoot my way</b><span class="muted small">$2 · 2 versions</span></button>
+          </div>
+          <div class="lv-panel" id="e-panel"></div>
+          <div class="lv-msg" id="e-msg"></div>
+          <div style="margin-top:1rem"><button class="cta sm" id="e-approve">Approve this shot</button></div>
+          <div class="lv-reqs list" id="e-reqs" style="margin-top:1.4rem"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
+<script src="live.js"></script>
+<script>
+(function () {
+  var L = window.MTLive, $ = function (id) { return document.getElementById(id); };
+  var views = ['v-off', 'v-brand', 'v-new', 'v-piece'];
+  function show(v) { views.forEach(function (x) { $(x).hidden = x !== v; }); }
+  if (!L || !L.ready) { show('v-off'); $('brand-name').textContent = '—'; return; }
+  var sb = L.sb, brand = null, pieces = [], cur = null, shots = [], shot = null, door = null, spot = null, opts = {};
+
+  var STATUS = {
+    draft: ['Draft', 'y', 'Add photos of the piece and press Make 8 shots.'],
+    submitted: ['Sent', '', 'We got your photos. We&rsquo;re making 8 shots and checking each one against your photo.'],
+    in_work: ['In work', '', 'We&rsquo;re making your shots and checking each one against your photo.'],
+    ready: ['Ready', 'g', 'Click a shot to fix it or approve it.'],
+    approved: ['Approved', 'g', 'All 8 shots approved. You can still fix any shot.']
+  };
+
+  L.requireUser().then(function (user) {
+    if (!user) return;
+    return sb.from('brand_members').select('brand_id, brands(id, name)').eq('user_id', user.id).limit(1).then(function (r) {
+      var row = L.must(r)[0];
+      if (!row) { show('v-brand'); return; }
+      brand = row.brands; $('brand-name').textContent = brand.name;
+      return loadPieces().then(function () { pieces.length ? openPiece(pieces[0].id) : newShoot(); });
+    });
+  }).catch(function (e) { alert(e.message); });
+
+  $('signout').onclick = function (e) { e.preventDefault(); sb.auth.signOut().then(function () { location.href = 'signin.html'; }); };
+  $('go-new').onclick = function (e) { e.preventDefault(); newShoot(); };
+
+  $('f-brand').onsubmit = function (e) {
+    e.preventDefault();
+    sb.rpc('create_brand', { brand_name: $('b-name').value, url: $('b-url').value }).then(function (r) {
+      if (r.error) { $('b-msg').textContent = r.error.message; return; }
+      location.reload();
+    });
+  };
+
+  function loadPieces() {
+    return sb.from('pieces').select('id, title, status, created_at').eq('brand_id', brand.id).order('created_at', { ascending: false }).then(function (r) {
+      pieces = L.must(r);
+      var box = $('pieces'); box.innerHTML = '';
+      pieces.forEach(function (p) {
+        var st = STATUS[p.status];
+        box.appendChild(L.el('div', { class: 'it' + (cur && cur.id === p.id ? ' on' : ''), onclick: function () { openPiece(p.id); } },
+          [L.el('b', { text: p.title, style: 'font-weight:400' }), L.el('span', { class: 'pill ' + st[1], text: st[0] })]));
+      });
+    });
+  }
+
+  // ---------- new shoot ----------
+  var files = [];
+  function newShoot() {
+    cur = null; files = []; $('f-new').reset(); $('n-list').innerHTML = ''; $('n-msg').textContent = ''; show('v-new'); loadPieces();
+  }
+  $('n-files').onchange = function () {
+    Array.prototype.forEach.call(this.files, function (f) {
+      var item = { file: f, kind: files.length ? 'other' : 'front' }; files.push(item);
+      var sel = L.el('select', { 'aria-label': 'What this photo shows' });
+      ['front', 'back', 'detail', 'other'].forEach(function (k) { var o = L.el('option', { value: k, text: k }); if (k === item.kind) o.selected = true; sel.appendChild(o); });
+      sel.onchange = function () { item.kind = sel.value; };
+      var img = L.el('img', { alt: f.name }); img.src = URL.createObjectURL(f);
+      $('n-list').appendChild(L.el('div', { class: 'lv-file' }, [img, sel]));
+    });
+    this.value = '';
+  };
+  function saveNew(send) {
+    var msg = $('n-msg');
+    if (send && !files.length) { msg.textContent = 'Add at least one photo of the piece.'; return; }
+    msg.textContent = 'Saving…';
+    var piece;
+    sb.from('pieces').insert({ brand_id: brand.id, title: $('n-title').value.trim(), product_url: $('n-url').value.trim() || null, note: $('n-note').value.trim() })
+      .select('id').single().then(function (r) {
+        piece = L.must(r);
+        return files.reduce(function (chain, it, i) {
+          return chain.then(function () {
+            msg.textContent = 'Uploading photo ' + (i + 1) + ' of ' + files.length + '…';
+            var path = brand.id + '/' + piece.id + '/' + L.safeName(it.file.name);
+            return sb.storage.from('sources').upload(path, it.file, { contentType: it.file.type }).then(function (u) {
+              L.must(u);
+              return sb.from('source_photos').insert({ piece_id: piece.id, storage_path: path, kind: it.kind }).then(L.must);
+            });
+          });
+        }, Promise.resolve());
+      }).then(function () {
+        return send ? sb.rpc('submit_piece', { p: piece.id }).then(L.must) : null;
+      }).then(function () {
+        msg.textContent = '';
+        return loadPieces().then(function () { openPiece(piece.id); });
+      }).catch(function (e) { msg.textContent = 'Could not save: ' + e.message; });
+  }
+  $('f-new').onsubmit = function (e) { e.preventDefault(); saveNew(true); };
+  $('n-draft').onclick = function () { if ($('f-new').reportValidity()) saveNew(false); };
+
+  // ---------- one piece ----------
+  function openPiece(id) {
+    show('v-piece'); $('p-ed').hidden = true; shot = null;
+    Promise.all([
+      sb.from('pieces').select('*').eq('id', id).single(),
+      sb.from('source_photos').select('*').eq('piece_id', id).order('created_at'),
+      sb.from('shots').select('id, n, current_version_id, approved_at, shot_versions!shot_versions_shot_id_fkey(id, v, storage_path, created_at)').eq('piece_id', id).order('n')
+    ]).then(function (rs) {
+      cur = L.must(rs[0]); var src = L.must(rs[1]); shots = L.must(rs[2]);
+      var st = STATUS[cur.status];
+      $('p-label').textContent = 'Catalog photos · ' + new Date(cur.created_at).toLocaleDateString();
+      $('p-title').textContent = cur.title;
+      $('p-status').textContent = st[0]; $('p-status').className = 'pill ' + st[1];
+      $('p-help').innerHTML = st[2];
+      $('p-draft-actions').hidden = cur.status !== 'draft';
+      var sbox = $('p-sources'); sbox.innerHTML = '';
+      src.forEach(function (s) {
+        var img = L.el('img', { alt: s.kind });
+        L.fileUrl('sources', s.storage_path).then(function (u) { img.src = u; });
+        sbox.appendChild(L.el('div', { class: 'lv-file' }, [img, L.el('span', { class: 'muted', text: 'Your photo · ' + s.kind })]));
+      });
+      drawShots();
+      loadPieces();
+    }).catch(function (e) { $('p-help').textContent = e.message; });
+  }
+  $('p-send').onclick = function () {
+    sb.rpc('submit_piece', { p: cur.id }).then(function (r) { if (r.error) { $('p-help').textContent = r.error.message; return; } openPiece(cur.id); });
+  };
+
+  // The current version, or the newest one the brand can see if ours isn't shown yet.
+  function currentVersion(s) {
+    var vs = s.shot_versions || [];
+    return vs.filter(function (v) { return v.id === s.current_version_id; })[0] ||
+      vs.slice().sort(function (a, b) { return b.v - a.v; })[0];
+  }
+  function drawShots() {
+    var g = $('p-shots'); g.innerHTML = '';
+    if (cur.status === 'draft' || cur.status === 'submitted' || cur.status === 'in_work') return;
+    shots.forEach(function (s) {
+      var v = currentVersion(s), im = L.el('div', { class: 'im' });
+      if (v) L.fileUrl('shots', v.storage_path).then(function (u) { im.style.backgroundImage = 'url("' + u + '")'; });
+      g.appendChild(L.el('button', { class: 'lv-shot' + (shot && shot.id === s.id ? ' on' : ''), onclick: function () { openShot(s); } }, [im,
+        L.el('div', { class: 'cap' }, [L.el('span', { text: s.n + ' · ' + L.angles[s.n - 1] }), L.el('span', { text: s.approved_at ? '✓' : (v ? 'v' + v.v : '—') })])]));
+    });
+  }
+
+  // ---------- one shot: edit and approve ----------
+  function openShot(s) {
+    shot = s; door = null; spot = null; opts = {}; $('e-msg').textContent = '';
+    $('p-ed').hidden = false; $('e-ring').hidden = true; drawShots();
+    $('e-name').textContent = 'Shot ' + s.n + ' · ' + L.angles[s.n - 1];
+    var v = currentVersion(s);
+    $('e-img').removeAttribute('src');
+    if (v) L.fileUrl('shots', v.storage_path).then(function (u) { $('e-img').src = u; });
+    var vb = $('e-vers'); vb.innerHTML = '';
+    (s.shot_versions || []).slice().sort(function (a, b) { return a.v - b.v; }).forEach(function (x) {
+      vb.appendChild(L.el('button', { class: x.id === (currentVersion(s) || {}).id ? 'on' : '', text: 'v' + x.v, onclick: function () {
+        sb.rpc('use_version', { s: s.id, ver: x.id }).then(function (r) { if (r.error) { $('e-msg').textContent = r.error.message; return; } reloadShot(s.id); });
+      } }));
+    });
+    drawDoors(); loadRequests();
+  }
+  function reloadShot(id) {
+    sb.from('shots').select('id, n, current_version_id, approved_at, shot_versions!shot_versions_shot_id_fkey(id, v, storage_path, created_at)').eq('id', id).single().then(function (r) {
+      var s = L.must(r); shots = shots.map(function (x) { return x.id === id ? s : x; }); openShot(s);
+    });
+  }
+  function loadRequests() {
+    var KIND = { mismatch: 'Doesn’t match', background: 'Background', tone: 'Shade', spot_remove: 'Remove', spot_replace: 'Replace', redo: 'Reshoot' };
+    var ST = { new: ['Waiting', ''], in_work: ['In work', 'y'], done: ['Done', 'g'], rejected: ['Declined', 'r'] };
+    sb.from('edit_requests').select('*').eq('shot_id', shot.id).order('created_at', { ascending: false }).then(function (r) {
+      var box = $('e-reqs'); box.innerHTML = '';
+      L.must(r).forEach(function (q) {
+        var what = [KIND[q.kind]].concat(q.issues || []).join(' · ') + (q.text ? ': ' + q.text : '');
+        box.appendChild(L.el('div', { class: 'it' }, [L.el('span', { text: what + (q.answer ? ' — ' + q.answer : '') }),
+          L.el('span', { class: 'pill ' + ST[q.status][1], text: ST[q.status][0] + (q.price_cents ? ' · $' + (q.price_cents / 100).toFixed(2) : '') })]));
+      });
+    });
+  }
+  $('e-stage').onclick = function (e) {
+    if (!door || door === 'redo') return;
+    var r = this.getBoundingClientRect();
+    spot = { x: +((e.clientX - r.left) / r.width).toFixed(3), y: +((e.clientY - r.top) / r.height).toFixed(3), r: 0.07 };
+    var ring = $('e-ring'); ring.hidden = false;
+    ring.style.left = spot.x * 100 + '%'; ring.style.top = spot.y * 100 + '%';
+    ring.style.width = ring.style.height = (spot.r * 2 * r.width) + 'px';
+    drawPanel();
+  };
+  document.querySelectorAll('.lv-door').forEach(function (d) {
+    d.onclick = function () { door = d.dataset.door; opts = {}; drawDoors(); };
+  });
+  function drawDoors() {
+    document.querySelectorAll('.lv-door').forEach(function (d) { d.classList.toggle('on', d.dataset.door === door); });
+    drawPanel();
+  }
+  function chips(key, list, multi) {
+    return L.el('div', { class: 'lv-chips' }, list.map(function (c) {
+      var val = c[0], on = multi ? (opts[key] || []).indexOf(val) >= 0 : opts[key] === val;
+      return L.el('button', { class: 'lv-chip' + (on ? ' on' : ''), type: 'button', text: c[1], onclick: function () {
+        if (multi) { var a = opts[key] || []; var i = a.indexOf(val); if (i >= 0) a.splice(i, 1); else a.push(val); opts[key] = a; }
+        else opts[key] = opts[key] === val ? null : val;
+        drawPanel();
+      } });
+    }));
+  }
+  function send(kind, label, payload) {
+    return L.el('button', { class: 'cta solid sm', type: 'button', text: label, onclick: function () {
+      var p = payload();
+      sb.rpc('request_edit', { s: shot.id, k: kind, issues: p.issues || [], spot: p.spot || null, txt: p.text || '', opts: p.opts || {} }).then(function (r) {
+        if (r.error) { $('e-msg').textContent = r.error.message; return; }
+        $('e-msg').textContent = 'Sent. You’ll see the new version next to this one.';
+        door = null; drawDoors(); loadRequests();
+      });
+    } });
+  }
+  function textBox(ph) { var t = L.el('input', { class: 'field', type: 'text', placeholder: ph, style: 'padding:.6rem .7rem;font-size:.85rem' }); t.value = opts._text || ''; t.oninput = function () { opts._text = t.value; }; return t; }
+  function hint(s) { return L.el('p', { class: 'form-note', style: 'margin:0', text: s }); }
+  function drawPanel() {
+    var p = $('e-panel'); p.innerHTML = '';
+    if (!door) { p.appendChild(hint('Something off? Pick one of the three. Happy with it? Approve it.')); return; }
+    if (door === 'bad') {
+      p.appendChild(L.el('b', { text: 'What’s off with the piece?', style: 'font-weight:400' }));
+      p.appendChild(chips('issues', [['pockets', 'Pockets'], ['buttons', 'Buttons'], ['zip', 'Zip'], ['collar', 'Collar'], ['sleeves', 'Sleeves'], ['length', 'Length'], ['color', 'Color'], ['print', 'Print'], ['skin', 'Skin tone']], true));
+      p.appendChild(hint(spot ? 'Spot marked.' : 'Tap the spot on the shot, it helps us find it faster.'));
+      p.appendChild(textBox('Anything else? (optional)'));
+      p.appendChild(send('mismatch', 'Reshoot free', function () { return { issues: opts.issues || [], spot: spot, text: opts._text }; }));
+    }
+    if (door === 'fix') {
+      p.appendChild(chips('what', [['background', 'Background'], ['tone', 'Shade of the piece'], ['spot_remove', 'Remove something'], ['spot_replace', 'Replace something'], ['detail', 'A detail of the piece']], false));
+      var w = opts.what;
+      if (w === 'background') {
+        p.appendChild(chips('bg', [['white', 'White'], ['light_grey', 'Light grey'], ['own', 'Your color']], false));
+        if (opts.bg === 'own') p.appendChild(textBox('Color, e.g. #EDE8E0 or warm beige'));
+        p.appendChild(hint('Changes the background on all 8 shots. The model and the piece stay as they are.'));
+        p.appendChild(send('background', 'Change background · free', function () { return { opts: { color: opts.bg, own: opts._text || '' } }; }));
+      }
+      if (w === 'tone') {
+        p.appendChild(chips('dir', [['match', 'Like my photo'], ['darker', 'A bit darker'], ['lighter', 'A bit lighter'], ['warmer', 'Warmer'], ['cooler', 'Cooler']], false));
+        p.appendChild(hint('Only the piece changes. Skin and background stay as they are.'));
+        p.appendChild(send('tone', 'Fix shade · free', function () { return { opts: { direction: opts.dir || 'match' } }; }));
+      }
+      if (w === 'spot_remove' || w === 'spot_replace') {
+        p.appendChild(hint(spot ? 'Spot marked. The rest of the shot stays.' : 'Tap the spot on the shot.'));
+        p.appendChild(textBox(w === 'spot_remove' ? 'e.g. remove the belt' : 'e.g. black belt instead of brown'));
+        p.appendChild(send(w, (w === 'spot_remove' ? 'Remove' : 'Replace') + ' · $0.50', function () { return { spot: spot, text: opts._text }; }));
+      }
+      if (w === 'detail') {
+        p.appendChild(hint('A detail that isn’t like your piece is our mistake, so the fix is free.'));
+        p.appendChild(hint(spot ? 'Spot marked.' : 'Tap the spot on the shot.'));
+        p.appendChild(textBox('What’s different, e.g. the pocket has no flap'));
+        p.appendChild(send('mismatch', 'Fix free', function () { return { issues: ['detail'], spot: spot, text: opts._text }; }));
+      }
+    }
+    if (door === 'redo') {
+      p.appendChild(hint('Pose')); p.appendChild(chips('pose', [['hands_in_pockets', 'Hands in pockets'], ['walking', 'Walking'], ['turn', 'Half turn'], ['sitting', 'Sitting']], false));
+      p.appendChild(hint('Framing')); p.appendChild(chips('crop', [['full', 'Full length'], ['thigh', 'To mid-thigh'], ['waist', 'To the waist']], false));
+      p.appendChild(textBox('Or say it in your words: tuck the shirt in, look to the side'));
+      p.appendChild(hint('You get 2 versions and keep one.'));
+      p.appendChild(send('redo', 'Make 2 versions · $2', function () { return { text: opts._text, opts: { pose: opts.pose || null, crop: opts.crop || null } }; }));
+    }
+  }
+  $('e-approve').onclick = function () {
+    sb.rpc('approve_shot', { s: shot.id }).then(function (r) {
+      if (r.error) { $('e-msg').textContent = r.error.message; return; }
+      openPiece(cur.id);
+    });
+  };
+})();
+</script>
+</body>
+</html>

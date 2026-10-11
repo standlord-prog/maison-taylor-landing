@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Работа — MAISON TAYLOR</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400;500&family=Bodoni+Moda:opsz,wght@6..96,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mt.css">
+<link rel="stylesheet" href="app.css">
+<style>
+/* Our work screen: orders in, shots out, edits, library */
+.op-tabs { display: flex; gap: .4rem; flex-wrap: wrap; margin-bottom: 1.4rem; }
+.op-tabs button, .op-btn { border: 1px solid #4d4b46; background: none; color: #ccc; font: inherit; font-size: .75rem; padding: .4rem .8rem; cursor: pointer; }
+.op-tabs button.on { border-color: #f5f5f5; color: #f5f5f5; }
+.op-btn.main { background: #f5f5f5; color: #22211f; border-color: #f5f5f5; }
+.op-row { display: grid; grid-template-columns: 2.5rem 6rem minmax(0, 1fr); gap: 1rem; align-items: start; padding: .9rem 0; border-top: 1px solid #343330; }
+.op-thumb { width: 6rem; aspect-ratio: 3/4; object-fit: cover; background: #2d2c2a; display: block; }
+.op-imgs { display: flex; gap: .5rem; flex-wrap: wrap; }
+.op-imgs a img { width: 7rem; aspect-ratio: 3/4; object-fit: cover; display: block; }
+.op-req { border: 1px solid #343330; padding: 1rem; margin-bottom: .8rem; display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 1rem; }
+.op-spot { position: relative; }
+.op-spot img { width: 100%; display: block; }
+.op-spot i { position: absolute; border: 2px dashed #d9b44a; border-radius: 50%; transform: translate(-50%, -50%); }
+.op-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: .6rem; }
+.op-form .field { padding: .55rem .7rem; font-size: .85rem; }
+.op-form select { background: #22211f; color: #ddd; border: 1px solid #4d4b46; padding: .5rem; font: inherit; }
+.op-msg { color: #d9b44a; font-size: .8rem; min-height: 1em; margin: .5rem 0; }
+.op-lib { display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: .8rem; }
+.op-lib .card { border: 1px solid #343330; padding: .6rem; font-size: .78rem; display: flex; flex-direction: column; gap: .35rem; }
+.op-lib .card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; background: #2d2c2a; }
+label.op-chk { font-size: .75rem; color: #aaa; display: inline-flex; gap: .3rem; align-items: center; }
+@media (max-width: 700px) { .op-row { grid-template-columns: 2rem 4.5rem minmax(0, 1fr); } .op-thumb { width: 4.5rem; } .op-req { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body class="app">
+<div class="shell">
+  <aside class="side">
+    <a href="index.html" class="logo-link"><div class="logo"><span class="maison">Maison</span><span class="taylor">Taylor</span></div></a>
+    <div class="brandsw"><div><small>Наша работа</small><span id="who">&hellip;</span></div></div>
+    <nav class="menu">
+      <a href="#" data-tab="orders">Заказы</a>
+      <a href="#" data-tab="edits">Правки</a>
+      <a href="#" data-tab="library">Библиотека</a>
+      <span class="sep"></span>
+      <a href="#" id="signout" class="muted">Выйти</a>
+    </nav>
+  </aside>
+  <main class="main">
+    <section id="v-no" hidden><h1>Сюда только для нас.</h1><p class="muted" id="no-why"></p></section>
+
+    <section id="v-orders" hidden>
+      <div class="topbar"><div><div class="label">Каталожные фото</div><h1>Заказы.</h1></div></div>
+      <div class="op-tabs" id="o-filter"></div>
+      <div class="tbl-wrap"><table class="t" id="o-list"></table></div>
+    </section>
+
+    <section id="v-piece" hidden>
+      <div class="topbar"><div><div class="label" id="pc-brand"></div><h1 id="pc-title"></h1></div><span class="pill" id="pc-status"></span></div>
+      <p class="muted small" id="pc-note"></p>
+      <div class="label" style="margin:1rem 0 .5rem">Фото бренда</div>
+      <div class="op-imgs" id="pc-src"></div>
+      <div class="label" style="margin:1.4rem 0 .5rem">Стилизация по карте бренда</div>
+      <div class="muted small" id="pc-style"></div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin:1.2rem 0">
+        <button class="op-btn" id="pc-take">Взял в работу</button>
+        <button class="op-btn main" id="pc-publish">Показать бренду весь набор</button>
+        <button class="op-btn" id="pc-back">← К заказам</button>
+      </div>
+      <div class="op-msg" id="pc-msg"></div>
+      <div id="pc-shots"></div>
+    </section>
+
+    <section id="v-edits" hidden>
+      <div class="topbar"><div><div class="label">Что просят бренды</div><h1>Правки.</h1></div></div>
+      <div id="e-list"></div>
+    </section>
+
+    <section id="v-library" hidden>
+      <div class="topbar"><div><div class="label">Модели, обувь, сумки, украшения, фоны</div><h1>Библиотека.</h1></div></div>
+      <div class="op-tabs" id="l-filter"></div>
+      <form class="box" id="l-form" style="margin-bottom:1.4rem">
+        <h3>Добавить</h3>
+        <div class="op-form">
+          <select id="l-kind" aria-label="Тип"></select>
+          <input class="field" id="l-slug" placeholder="код, напр. model-maya" required pattern="[a-z0-9][a-z0-9_-]{1,60}">
+          <input class="field" id="l-name" placeholder="Имя для брендов, напр. Maya" required>
+          <select id="l-gender" aria-label="Пол"><option value="">пол —</option><option value="female">женский</option><option value="male">мужской</option><option value="unisex">унисекс</option></select>
+          <input class="field" id="l-tags" placeholder="стиль через запятую: minimal, sporty">
+          <input class="field" id="l-attrs" placeholder='{"height_cm":173,"size":"S"}'>
+          <input class="field" id="l-issues" placeholder="что генератор делает не так">
+        </div>
+        <div style="margin-top:.7rem"><button class="op-btn main" type="submit">Добавить черновиком</button></div>
+        <div class="op-msg" id="l-msg"></div>
+      </form>
+      <div class="op-lib" id="l-list"></div>
+    </section>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
+<script src="live.js"></script>
+<script>
+(function () {
+  var L = window.MTLive, $ = function (id) { return document.getElementById(id); }, E = L && L.el;
+  var VIEWS = ['v-no', 'v-orders', 'v-piece', 'v-edits', 'v-library'];
+  function show(v) { VIEWS.forEach(function (x) { $(x).hidden = x !== v; }); }
+  if (!L || !L.ready) { show('v-no'); $('no-why').textContent = 'Сервер не подключён: в config.js пусто.'; return; }
+  var sb = L.sb, me = null;
+  var ST = { draft: 'черновик', submitted: 'новый', in_work: 'в работе', ready: 'показан бренду', approved: 'утверждён' };
+  var KIND = { mismatch: 'не совпадает с вещью', background: 'фон', tone: 'оттенок', spot_remove: 'убрать в месте', spot_replace: 'заменить в месте', redo: 'переснять по-своему' };
+  var LIBKINDS = ['model', 'shoes', 'bag', 'jewelry', 'belt', 'hat', 'eyewear', 'top', 'bottom', 'outerwear', 'socks', 'background', 'prop'];
+  var ROLES = ['full_front', 'full_back', 'full_side', 'three_quarter', 'face', 'hair_back', 'product', 'on_body', 'detail', 'flat', 'plate'];
+  function err(box, e) { $(box).textContent = 'Ошибка: ' + (e.message || e); }
+
+  L.requireUser().then(function (u) {
+    if (!u) return;
+    me = u;
+    return sb.from('staff').select('name').eq('user_id', u.id).maybeSingle().then(function (r) {
+      if (!r.data) { show('v-no'); $('no-why').textContent = 'Ваш адрес ' + u.email + ' не в списке команды.'; return; }
+      $('who').textContent = r.data.name || u.email; tab('orders');
+    });
+  });
+  $('signout').onclick = function (e) { e.preventDefault(); sb.auth.signOut().then(function () { location.href = 'signin.html'; }); };
+  document.querySelectorAll('[data-tab]').forEach(function (a) { a.onclick = function (e) { e.preventDefault(); tab(a.dataset.tab); }; });
+  function tab(t) {
+    document.querySelectorAll('[data-tab]').forEach(function (a) { a.classList.toggle('on', a.dataset.tab === t); });
+    if (t === 'orders') orders(); if (t === 'edits') edits(); if (t === 'library') library();
+  }
+
+  // ---------- orders ----------
+  var oFilter = 'submitted';
+  function orders() {
+    show('v-orders');
+    var f = $('o-filter'); f.innerHTML = '';
+    ['submitted', 'in_work', 'ready', 'approved', 'draft'].forEach(function (s) {
+      f.appendChild(E('button', { class: s === oFilter ? 'on' : '', text: ST[s], onclick: function () { oFilter = s; orders(); } }));
+    });
+    sb.from('pieces').select('id, title, status, submitted_at, created_at, brands(name)').eq('status', oFilter).order('submitted_at', { ascending: true, nullsFirst: false }).then(function (r) {
+      var t = $('o-list'); t.innerHTML = '<tr><th>Вещь</th><th>Бренд</th><th>Отправлен</th><th></th></tr>';
+      (r.data || []).forEach(function (p) {
+        var tr = E('tr', {}, [E('td', { text: p.title }), E('td', { text: p.brands ? p.brands.name : '' }),
+          E('td', { text: p.submitted_at ? new Date(p.submitted_at).toLocaleString() : '—' }),
+          E('td', {}, [E('button', { class: 'op-btn', text: 'Открыть', onclick: function () { piece(p.id); } })])]);
+        t.appendChild(tr);
+      });
+      if (!(r.data || []).length) t.appendChild(E('tr', {}, [E('td', { colspan: '4', class: 'muted', text: 'Пусто.' })]));
+    });
+  }
+
+  // ---------- one piece ----------
+  var pc = null;
+  function piece(id) {
+    show('v-piece'); $('pc-msg').textContent = '';
+    Promise.all([
+      sb.from('pieces').select('*, brands(name)').eq('id', id).single(),
+      sb.from('source_photos').select('*').eq('piece_id', id).order('created_at'),
+      sb.from('shots').select('id, n, current_version_id, approved_at, shot_versions!shot_versions_shot_id_fkey(id, v, storage_path, visible_to_brand, check_passed, created_at)').eq('piece_id', id).order('n'),
+      sb.from('piece_library').select('role, shots, library_items(name, kind)').eq('piece_id', id)
+    ]).then(function (rs) {
+      pc = L.must(rs[0]); var src = L.must(rs[1]), shots = L.must(rs[2]), style = L.must(rs[3]);
+      $('pc-brand').textContent = (pc.brands ? pc.brands.name : '') + (pc.product_url ? ' · ' + pc.product_url : '');
+      $('pc-title').textContent = pc.title; $('pc-status').textContent = ST[pc.status];
+      $('pc-note').textContent = pc.note || '';
+      var sbox = $('pc-src'); sbox.innerHTML = '';
+      src.forEach(function (s) {
+        var img = E('img', { alt: s.kind }), a = E('a', { target: '_blank', title: s.kind }, [img]);
+        L.fileUrl('sources', s.storage_path).then(function (u) { img.src = u; a.href = u; });
+        sbox.appendChild(a);
+      });
+      $('pc-style').textContent = style.length ? style.map(function (x) { return x.role + ': ' + x.library_items.name + (x.shots.length < 8 ? ' (кадры ' + x.shots.join(', ') + ')' : ''); }).join(' · ') : 'Карта стиля бренда пуста.';
+      var box = $('pc-shots'); box.innerHTML = '';
+      shots.forEach(function (s) { box.appendChild(shotRow(s, null, pc)); });
+    }).catch(function (e) { err('pc-msg', e); });
+  }
+  $('pc-back').onclick = orders;
+  $('pc-take').onclick = function () {
+    sb.from('pieces').update({ status: 'in_work' }).eq('id', pc.id).then(function (r) { if (r.error) return err('pc-msg', r.error); piece(pc.id); });
+  };
+  $('pc-publish').onclick = function () {
+    sb.rpc('publish_piece', { p: pc.id }).then(function (r) { if (r.error) return err('pc-msg', r.error); piece(pc.id); });
+  };
+
+  // A row for one shot: current picture, versions, upload of a new version.
+  function shotRow(s, req, owner) {
+    var pp = owner || pc;
+    var vs = (s.shot_versions || []).slice().sort(function (a, b) { return a.v - b.v; });
+    var cur = vs.filter(function (v) { return v.id === s.current_version_id; })[0];
+    var img = E('img', { class: 'op-thumb', alt: '' });
+    if (cur) L.fileUrl('shots', cur.storage_path).then(function (u) { img.src = u; });
+    var file = E('input', { type: 'file', accept: 'image/*' });
+    var showNow = E('input', { type: 'checkbox' }); if (req || pp.status === 'ready' || pp.status === 'approved') showNow.checked = true;
+    var passed = E('input', { type: 'checkbox' }); passed.checked = true;
+    var maker = E('select', {}, ['generator', 'program', 'manual'].map(function (m) { return E('option', { value: m, text: m }); }));
+    var gen = E('input', { class: 'field', placeholder: 'генератор, напр. nano_banana_pro', style: 'padding:.4rem .6rem;font-size:.78rem' });
+    var prompt = E('input', { class: 'field', placeholder: 'задание генератору', style: 'padding:.4rem .6rem;font-size:.78rem' });
+    var msg = E('div', { class: 'op-msg' });
+    var up = E('button', { class: 'op-btn main', text: 'Загрузить версию', onclick: function () {
+      var f = file.files[0]; if (!f) { msg.textContent = 'Выберите файл.'; return; }
+      var next = (vs.length ? vs[vs.length - 1].v : 0) + 1;
+      var path = pp.brand_id + '/' + pp.id + '/' + s.n + '/v' + next + '-' + Date.now().toString(36) + '.' + (f.name.split('.').pop() || 'jpg').toLowerCase();
+      msg.textContent = 'Загружаю…';
+      sb.storage.from('shots').upload(path, f, { contentType: f.type }).then(function (u) {
+        L.must(u);
+        return sb.rpc('add_version', { s: s.id, path: path, maker: maker.value, req: req ? req.id : null, check_result: {}, passed: passed.checked, show: showNow.checked });
+      }).then(function (r) {
+        var vid = L.must(r);
+        if (gen.value || prompt.value) return sb.from('shot_versions').update({ generator: gen.value, prompt: prompt.value }).eq('id', vid).then(L.must);
+      }).then(function () { req ? edits() : piece(pp.id); }).catch(function (e) { msg.textContent = 'Ошибка: ' + e.message; });
+    } });
+    var versions = vs.map(function (v) { return 'v' + v.v + (v.visible_to_brand ? '' : ' (скрыта)') + (v.check_passed === false ? ' брак' : ''); }).join(' · ') || 'версий нет';
+    return E('div', { class: 'op-row' }, [E('b', { text: String(s.n), style: 'font-weight:400;font-size:1.3rem' }), img,
+      E('div', { style: 'display:flex;flex-direction:column;gap:.45rem;min-width:0' }, [
+        E('div', { class: 'small', text: L.angles[s.n - 1] + ' · ' + versions + (s.approved_at ? ' · утверждён брендом' : '') }),
+        file, E('div', { style: 'display:flex;gap:.8rem;flex-wrap:wrap;align-items:center' }, [maker,
+          E('label', { class: 'op-chk' }, [passed, 'проверки прошёл']), E('label', { class: 'op-chk' }, [showNow, 'сразу показать бренду'])]),
+        gen, prompt, up, msg])]);
+  }
+
+  // ---------- edits ----------
+  function edits() {
+    show('v-edits');
+    sb.from('edit_requests').select('*, shots(id, n, piece_id, current_version_id, approved_at, pieces(id, title, brand_id, status, brands(name)), shot_versions!shot_versions_shot_id_fkey(id, v, storage_path, visible_to_brand, check_passed, created_at))')
+      .in('status', ['new', 'in_work']).order('created_at').then(function (r) {
+        var box = $('e-list'); box.innerHTML = '';
+        var list = r.data || [];
+        if (!list.length) box.appendChild(E('p', { class: 'muted', text: 'Открытых правок нет.' }));
+        list.forEach(function (q) {
+          var s = q.shots, p = s.pieces;
+          var cur = (s.shot_versions || []).filter(function (v) { return v.id === s.current_version_id; })[0];
+          var pic = E('div', { class: 'op-spot' }, [E('img', { alt: '' })]);
+          if (cur) L.fileUrl('shots', cur.storage_path).then(function (u) { pic.firstChild.src = u; });
+          if (q.spot) pic.appendChild(E('i', { style: 'left:' + q.spot.x * 100 + '%;top:' + q.spot.y * 100 + '%;width:' + q.spot.r * 200 + '%;aspect-ratio:1' }));
+          var answer = E('input', { class: 'field', placeholder: 'ответ бренду (виден ему)', style: 'padding:.4rem .6rem;font-size:.8rem' });
+          var msg = E('div', { class: 'op-msg' });
+          function setStatus(st) {
+            sb.from('edit_requests').update({ status: st, answer: answer.value }).eq('id', q.id).then(function (x) { if (x.error) msg.textContent = x.error.message; else edits(); });
+          }
+          var row = shotRow(s, q, { id: p.id, brand_id: p.brand_id, status: p.status });
+          box.appendChild(E('div', { class: 'op-req' }, [pic, E('div', { style: 'display:flex;flex-direction:column;gap:.45rem;min-width:0' }, [
+            E('b', { style: 'font-weight:400', text: (p.brands ? p.brands.name : '') + ' · ' + p.title + ' · кадр ' + s.n }),
+            E('div', { class: 'small', text: KIND[q.kind] + (q.issues.length ? ': ' + q.issues.join(', ') : '') + (q.text ? ' — «' + q.text + '»' : '') +
+              (Object.keys(q.options || {}).length ? ' · ' + JSON.stringify(q.options) : '') + (q.price_cents ? ' · $' + (q.price_cents / 100).toFixed(2) : ' · бесплатно') }),
+            E('div', { class: 'small muted', text: (q.status === 'new' ? 'ждёт' : 'в работе') + ' с ' + new Date(q.created_at).toLocaleString() }),
+            answer, E('div', { style: 'display:flex;gap:.4rem;flex-wrap:wrap' }, [
+              E('button', { class: 'op-btn', text: 'В работу', onclick: function () { setStatus('in_work'); } }),
+              E('button', { class: 'op-btn', text: 'Отклонить с ответом', onclick: function () { if (!answer.value) { msg.textContent = 'Напишите бренду почему.'; return; } setStatus('rejected'); } })]),
+            msg, row])]));
+        });
+      });
+  }
+
+  // ---------- library ----------
+  var lFilter = 'model';
+  LIBKINDS.forEach(function (k) { $('l-kind').appendChild(E('option', { value: k, text: k })); });
+  function library() {
+    show('v-library');
+    var f = $('l-filter'); f.innerHTML = '';
+    LIBKINDS.forEach(function (k) { f.appendChild(E('button', { class: k === lFilter ? 'on' : '', text: k, onclick: function () { lFilter = k; $('l-kind').value = k; library(); } })); });
+    sb.from('library_items').select('*, library_images(id, role, storage_path, is_primary), brands!library_items_brand_id_fkey(name)').eq('kind', lFilter).order('created_at', { ascending: false }).then(function (r) {
+      var box = $('l-list'); box.innerHTML = '';
+      (r.data || []).forEach(function (it) { box.appendChild(libCard(it)); });
+      if (!(r.data || []).length) box.appendChild(E('p', { class: 'muted', text: 'Пока пусто.' }));
+    });
+  }
+  function libCard(it) {
+    var imgs = it.library_images || [], prim = imgs.filter(function (i) { return i.is_primary; })[0] || imgs[0];
+    var img = E('img', { alt: it.name });
+    if (prim) L.fileUrl('library', prim.storage_path).then(function (u) { img.src = u; });
+    var role = E('select', {}, ROLES.map(function (r) { return E('option', { value: r, text: r }); }));
+    var file = E('input', { type: 'file', accept: 'image/*', multiple: 'multiple' });
+    var msg = E('div', { class: 'op-msg' });
+    var add = E('button', { class: 'op-btn', text: 'Загрузить фото', onclick: function () {
+      var fs = Array.prototype.slice.call(file.files); if (!fs.length) { msg.textContent = 'Выберите файлы.'; return; }
+      var base = (it.brand_id || 'shared') + '/' + it.id + '/';
+      fs.reduce(function (ch, f, i) {
+        return ch.then(function () {
+          var path = base + L.safeName(f.name);
+          return sb.storage.from('library').upload(path, f, { contentType: f.type }).then(function (u) {
+            L.must(u);
+            return sb.from('library_images').insert({ item_id: it.id, role: role.value, storage_path: path, is_primary: !imgs.length && i === 0 }).then(L.must);
+          });
+        });
+      }, Promise.resolve()).then(library).catch(function (e) { msg.textContent = e.message; });
+    } });
+    var stat = E('select', {}, ['draft', 'approved', 'retired'].map(function (s) { var o = E('option', { value: s, text: s }); if (s === it.status) o.selected = true; return o; }));
+    stat.onchange = function () { sb.from('library_items').update({ status: stat.value, updated_at: new Date().toISOString() }).eq('id', it.id).then(function (r) { if (r.error) msg.textContent = r.error.message; }); };
+    var attrs = Object.keys(it.attrs || {}).map(function (k) { return k + ': ' + it.attrs[k]; }).join(' · ');
+    return E('div', { class: 'card' }, [img, E('b', { style: 'font-weight:400', text: it.name + (it.gender ? ' · ' + it.gender : '') }),
+      E('span', { class: 'muted', text: it.slug + (it.brands ? ' · бренд ' + it.brands.name : '') }),
+      attrs ? E('span', { class: 'muted', text: attrs }) : null,
+      it.known_issues ? E('span', { style: 'color:#d9b44a', text: it.known_issues }) : null,
+      E('span', { class: 'muted', text: imgs.length + ' фото: ' + imgs.map(function (i) { return i.role; }).join(', ') }),
+      stat, role, file, add, msg]);
+  }
+  $('l-form').onsubmit = function (e) {
+    e.preventDefault();
+    var attrs = {};
+    try { attrs = $('l-attrs').value.trim() ? JSON.parse($('l-attrs').value) : {}; } catch (x) { $('l-msg').textContent = 'Свойства должны быть в виде {"height_cm":173}'; return; }
+    sb.from('library_items').insert({
+      slug: $('l-slug').value.trim(), kind: $('l-kind').value, name: $('l-name').value.trim(), gender: $('l-gender').value || null,
+      tags: $('l-tags').value.split(',').map(function (t) { return t.trim(); }).filter(Boolean), attrs: attrs, known_issues: $('l-issues').value.trim()
+    }).then(function (r) { if (r.error) { $('l-msg').textContent = r.error.message; return; } $('l-form').reset(); $('l-msg').textContent = ''; lFilter = $('l-kind').value; library(); });
+  };
+})();
+</script>
+</body>
+</html>
